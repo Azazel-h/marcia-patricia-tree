@@ -9,6 +9,8 @@ if (NOT DEFINED namespace)
     set(namespace "mpt")
 endif ()
 
+add_subdirectory(external/evmc)
+
 # here you can see how instead of writing "SomeLibrary"
 # we can just use the PROJECT_NAME variable
 add_library(${PROJECT_NAME} STATIC)
@@ -28,6 +30,10 @@ target_include_directories(${PROJECT_NAME}
         $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
         # where external projects will look for the library's public headers
         $<INSTALL_INTERFACE:${CMAKE_INSTALL_INCLUDEDIR}>
+)
+target_link_libraries(${PROJECT_NAME}
+        PRIVATE
+        evmc
 )
 
 # note that it is not CMAKE_INSTALL_PREFIX we are checking here
