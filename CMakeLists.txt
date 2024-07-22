@@ -9,8 +9,6 @@ if (NOT DEFINED namespace)
     set(namespace "mpt")
 endif ()
 
-# Add external dependencies
-add_subdirectory(external)
 
 # Create the main library
 add_library(${PROJECT_NAME} STATIC)
@@ -35,11 +33,13 @@ target_include_directories(${PROJECT_NAME}
         $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
         $<INSTALL_INTERFACE:${CMAKE_INSTALL_INCLUDEDIR}>
 )
-
+#add_subdirectory(external/ethash)
+#add_subdirectory(external/intx)
+#add_subdirectory(external/evmone)
 target_link_libraries(${PROJECT_NAME}
         PRIVATE
-        intx::intx
-        ethash::ethash
+        intx
+        ethash
         evmone
 )
 
