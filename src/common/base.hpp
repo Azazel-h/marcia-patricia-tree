@@ -23,7 +23,7 @@
 #include <cstdint>
 #include <tuple>
 
-#include <intx.hpp>
+#include <intx/intx.hpp>
 
 // TODO(yperbasis): get rid of this hack
 #if defined(_MSC_VER)

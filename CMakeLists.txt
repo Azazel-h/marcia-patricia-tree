@@ -29,18 +29,22 @@ target_sources(${PROJECT_NAME}
 target_include_directories(${PROJECT_NAME}
         PRIVATE
         ${CMAKE_CURRENT_SOURCE_DIR}/src
+        ${CMAKE_CURRENT_SOURCE_DIR}/external/intx/include
+        ${CMAKE_CURRENT_SOURCE_DIR}/external/ethash/include
+        ${CMAKE_CURRENT_SOURCE_DIR}/external/evmone/include
+        ${CMAKE_CURRENT_SOURCE_DIR}/external/evmone/evmc/include
         PUBLIC
         $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
         $<INSTALL_INTERFACE:${CMAKE_INSTALL_INCLUDEDIR}>
 )
+
 #add_subdirectory(external/ethash)
 #add_subdirectory(external/intx)
 #add_subdirectory(external/evmone)
 target_link_libraries(${PROJECT_NAME}
         PRIVATE
-        intx
-        ethash
         evmone
+        evmc
 )
 
 include(GNUInstallDirs)

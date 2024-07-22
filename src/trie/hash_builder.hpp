@@ -21,9 +21,9 @@
 #include <variant>
 #include <vector>
 
-#include <silkworm/core/common/base.hpp>
-#include <silkworm/core/common/bytes.hpp>
-#include <silkworm/core/trie/node.hpp>
+#include "common/base.hpp"
+#include "common/bytes.hpp"
+#include "trie/node.hpp"
 
 namespace silkworm::trie {
 

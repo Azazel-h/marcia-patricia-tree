@@ -21,8 +21,8 @@
 
 #include <evmc/evmc.hpp>
 
-#include <silkworm/core/common/bytes.hpp>
-#include <silkworm/core/common/decoding_result.hpp>
+#include "common/bytes.hpp"
+#include "common/decoding_result.hpp"
 
 namespace silkworm::trie {
 

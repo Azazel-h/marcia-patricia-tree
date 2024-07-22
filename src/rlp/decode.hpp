@@ -25,10 +25,10 @@
 
 #include <intx/intx.hpp>
 
-#include <silkworm/core/common/base.hpp>
-#include <silkworm/core/common/bytes.hpp>
-#include <silkworm/core/common/decoding_result.hpp>
-#include <silkworm/core/rlp/encode.hpp>
+#include "common/base.hpp"
+#include "common/bytes.hpp"
+#include "common/decoding_result.hpp"
+#include "rlp/encode.hpp"
 
 namespace silkworm::rlp {
 
