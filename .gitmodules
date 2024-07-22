@@ -1,6 +1,9 @@
 [submodule "intx"]
-	path = external/intx
+	path = external/intx/intx
 	url = https://github.com/chfast/intx
+[submodule "ethash"]
+    path = external/ethash/ethash
+    url = https://github.com/chfast/ethash.git
 [submodule "evmone"]
 	path = external/evmone/evmone
 	url = https://github.com/ethereum/evmone.git
