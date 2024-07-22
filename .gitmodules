@@ -1,6 +1,6 @@
-[submodule "evmc"]
-	path = external/evmc
-	url = https://github.com/ethereum/evmc.git
+[submodule "evmone"]
+	path = external/evmone
+	url = git@github.com:ethereum/evmone.git
 [submodule "intx"]
 	path = external/intx
 	url = https://github.com/chfast/intx

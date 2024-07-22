@@ -9,8 +9,8 @@ if (NOT DEFINED namespace)
     set(namespace "mpt")
 endif ()
 
-add_subdirectory(external/evmc)
-
+link_directories(external)
+#target_link_libraries(${PROJECT_NAME} PRIVATE evmc intx)
 # here you can see how instead of writing "SomeLibrary"
 # we can just use the PROJECT_NAME variable
 add_library(${PROJECT_NAME} STATIC)
