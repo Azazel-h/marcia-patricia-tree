@@ -9,8 +9,9 @@ if (NOT DEFINED namespace)
     set(namespace "mpt")
 endif ()
 
-add_subdirectory(external)
-#target_link_libraries(${PROJECT_NAME} PRIVATE evmc intx)
+
+
+#target_link_libraries(${PROJECT_NAME} PRIVATE intx ethash evmone)
 # here you can see how instead of writing "SomeLibrary"
 # we can just use the PROJECT_NAME variable
 add_library(${PROJECT_NAME} STATIC)
@@ -42,10 +43,7 @@ target_include_directories(${PROJECT_NAME}
         # where external projects will look for the library's public headers
         $<INSTALL_INTERFACE:${CMAKE_INSTALL_INCLUDEDIR}>
 )
-target_link_libraries(${PROJECT_NAME}
-        PRIVATE
-        evmc
-)
+
 
 # note that it is not CMAKE_INSTALL_PREFIX we are checking here
 if (DEFINED CMAKE_INSTALL_PREFIX_INITIALIZED_TO_DEFAULT)
@@ -93,11 +91,17 @@ foreach (header ${public_headers})
     )
 endforeach ()
 
+add_subdirectory(external)
+target_link_libraries(${PROJECT_NAME}
+        external/intx
+        external/ethash
+        external/evmone
+)
 set_target_properties(${PROJECT_NAME} PROPERTIES DEBUG_POSTFIX "d")
 
 # if you haven't included it already
 # definitions of CMAKE_INSTALL_LIBDIR, CMAKE_INSTALL_INCLUDEDIR and others
-include(GNUInstallDirs)
+#include(GNUInstallDirs)
 
 # install the target and create export-set
 install(TARGETS ${PROJECT_NAME}
