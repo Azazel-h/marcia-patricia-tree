@@ -14,7 +14,7 @@
    limitations under the License.
 */
 
-#include "bytes.hpp"
+#include "common/bytes.hpp"
 
 #include <catch2/catch_test_macros.hpp>
 

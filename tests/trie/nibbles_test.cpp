@@ -18,8 +18,8 @@
 
 #include <catch2/catch_test_macros.hpp>
 
-#include <silkworm/core/common/util.hpp>
-#include <silkworm/core/trie/nibbles.hpp>
+#include "common/util.hpp"
+#include "trie/nibbles.hpp"
 
 namespace silkworm::trie {
 

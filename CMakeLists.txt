@@ -42,11 +42,21 @@ target_include_directories(${PROJECT_NAME}
 #add_subdirectory(external/ethash)
 #add_subdirectory(external/intx)
 #add_subdirectory(external/evmone)
+
 target_link_libraries(${PROJECT_NAME}
         PRIVATE
         evmone
         evmc
 )
+
+# Enable testing
+enable_testing()
+
+# Add Catch2
+add_subdirectory(external/catch2)
+
+# Add the tests subdirectory
+add_subdirectory(tests)
 
 include(GNUInstallDirs)
 

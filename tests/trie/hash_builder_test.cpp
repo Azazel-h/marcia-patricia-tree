@@ -19,12 +19,12 @@
 #include <catch2/catch_test_macros.hpp>
 #include <ethash/keccak.hpp>
 
-#include <silkworm/core/common/empty_hashes.hpp>
-#include <silkworm/core/common/util.hpp>
-#include <silkworm/core/rlp/encode.hpp>
-#include <silkworm/core/trie/hash_builder.hpp>
-#include <silkworm/core/trie/nibbles.hpp>
-#include <silkworm/core/types/evmc_bytes32.hpp>
+#include "common/empty_hashes.hpp"
+#include "common/util.hpp"
+#include "rlp/encode.hpp"
+#include "trie/hash_builder.hpp"
+#include "trie/nibbles.hpp"
+//#include "types/evmc_bytes32.hpp"
 
 namespace silkworm::trie {
 

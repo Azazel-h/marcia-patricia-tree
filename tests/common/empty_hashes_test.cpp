@@ -14,16 +14,16 @@
    limitations under the License.
 */
 
-#include "empty_hashes.hpp"
+#include "common/empty_hashes.hpp"
 
 #include <bit>
 
 #include <catch2/catch_test_macros.hpp>
 
-#include <silkworm/core/rlp/encode.hpp>
+#include "rlp/encode.hpp"
 
-#include "bytes.hpp"
-#include "util.hpp"
+#include "common/bytes.hpp"
+#include "common/util.hpp"
 
 namespace silkworm {
 

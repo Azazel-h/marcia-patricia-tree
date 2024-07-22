@@ -19,9 +19,9 @@
 #include <concepts>
 #include <utility>
 
-#include <silkworm/core/rlp/encode.hpp>
-#include <silkworm/core/trie/hash_builder.hpp>
-#include <silkworm/core/trie/nibbles.hpp>
+#include "rlp/encode.hpp"
+#include "trie/hash_builder.hpp"
+#include "trie/nibbles.hpp"
 
 namespace silkworm::trie {
 
