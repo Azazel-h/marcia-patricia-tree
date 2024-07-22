@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.28)
-project(marcia-patricia-tree)
+project(merkle-patricia-tree)
 
 if (NOT DEFINED version)
     set(version "1.0.0")
