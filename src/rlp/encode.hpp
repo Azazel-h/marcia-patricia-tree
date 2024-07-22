@@ -20,10 +20,9 @@
 #pragma once
 
 #include <intx/intx.hpp>
-
-#include <silkworm/core/common/base.hpp>
-#include <silkworm/core/common/bytes.hpp>
-#include <silkworm/core/common/endian.hpp>
+#include "common/base.hpp"
+#include "common/bytes.hpp"
+#include "common/endian.hpp"
 
 namespace silkworm::rlp {
 
