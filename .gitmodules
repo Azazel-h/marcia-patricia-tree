@@ -1,9 +1,12 @@
 [submodule "ethash"]
     path = external/ethash
     url = https://github.com/chfast/ethash.git
+[submodule "intx"]
+    path = external/intx
+    url = https://github.com/chfast/intx.git
 [submodule "evmone"]
 	path = external/evmone
 	url = https://github.com/ethereum/evmone.git
-[submodule "intx"]
-	path = external/intx
-	url = https://github.com/chfast/intx.git
+[submodule "expected"]
+	path = external/expected
+	url = https://github.com/TartanLlama/expected.git

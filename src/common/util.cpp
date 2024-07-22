@@ -20,7 +20,7 @@
 #include <cstdio>
 #include <regex>
 
-#include <silkworm/core/common/assert.hpp>
+#include "common/assert.hpp"
 
 namespace silkworm {
 
