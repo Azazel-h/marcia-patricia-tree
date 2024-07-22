@@ -4,9 +4,6 @@
 [submodule "intx"]
     path = external/intx
     url = https://github.com/chfast/intx.git
-[submodule "evmc"]
-	path = external/evmc
-	url = https://github.com/ethereum/evmc.git
 [submodule "expected"]
 	path = external/expected
 	url = https://github.com/TartanLlama/expected.git
