@@ -3,13 +3,9 @@
 //
 #include "some.h"
 
-namespace sm
-{
-    namespace lbr
-    {
-        void print_something()
-        {
-            std::cout << "Hello" << std::endl;
-        }
+
+namespace sm::lbr {
+    void print_something() {
+        std::cout << "Hello" << std::endl;
     }
 }

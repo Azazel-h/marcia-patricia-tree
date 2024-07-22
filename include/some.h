@@ -4,15 +4,14 @@
 
 #ifndef MPT_LIB_SOME_H
 #define MPT_LIB_SOME_H
+
 #include <iomanip>
 #include <iostream>
 
-namespace sm
-{
-    namespace lbr
-    {
-        void print_something();
-    }
+
+namespace sm::lbr {
+    void print_something();
 }
+
 
 #endif //MPT_LIB_SOME_H
