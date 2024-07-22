@@ -1,2 +1,2 @@
-add_subdirectory(evmone)
 add_subdirectory(intx)
+add_subdirectory(evmone)

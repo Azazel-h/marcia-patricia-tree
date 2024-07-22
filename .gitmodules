@@ -1,5 +1,5 @@
 [submodule "evmone"]
-	path = external/evmone
+	path = external/evmone/evmone
 	url = git@github.com:ethereum/evmone.git
 [submodule "intx"]
 	path = external/intx
