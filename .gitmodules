@@ -1,6 +1,6 @@
 [submodule "intx"]
 	path = external/intx
-	url = https://github.com/chfast/intx
+	url = https://github.com/chfast/intx.git
 [submodule "ethash"]
     path = external/ethash
     url = https://github.com/chfast/ethash.git
