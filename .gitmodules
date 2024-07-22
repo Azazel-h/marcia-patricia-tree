@@ -10,3 +10,6 @@
 [submodule "catch2"]
 	path = external/catch2
 	url = https://github.com/catchorg/Catch2.git
+[submodule "external/evmc"]
+	path = external/evmc
+	url = https://github.com/ethereum/evmc.git
