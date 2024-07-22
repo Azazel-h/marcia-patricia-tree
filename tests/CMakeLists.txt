@@ -29,8 +29,7 @@ target_include_directories(merkle_patricia_tree_tests
         ${CMAKE_CURRENT_SOURCE_DIR}/../include
         ${CMAKE_CURRENT_SOURCE_DIR}/../external/intx/include
         ${CMAKE_CURRENT_SOURCE_DIR}/../external/ethash/include
-        ${CMAKE_CURRENT_SOURCE_DIR}/../external/evmone/include
-        ${CMAKE_CURRENT_SOURCE_DIR}/../external/evmone/evmc/include
+        ${CMAKE_CURRENT_SOURCE_DIR}/../external/evmc/include
         ${CMAKE_CURRENT_SOURCE_DIR}/../external/expected/include
 )
 
