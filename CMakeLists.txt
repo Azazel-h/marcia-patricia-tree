@@ -16,9 +16,20 @@ add_subdirectory(external/evmc)
 add_library(${PROJECT_NAME} STATIC)
 
 # no need to add headers here, only sources are required
+
+file(
+    GLOB_RECURSE
+    SILKWORM_CORE_SRC
+    CONFIGURE_DEPENDS
+    "*.cpp"
+    "*.hpp"
+    "*.c"
+    "*.h"
+)
+
 target_sources(${PROJECT_NAME}
         PRIVATE
-        src/some.cpp
+        ${SILKWORM_CORE_SRC}
 )
 
 target_include_directories(${PROJECT_NAME}
