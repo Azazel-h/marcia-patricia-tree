@@ -19,8 +19,8 @@
 #include <bit>
 #include <utility>
 
-#include <silkworm/core/common/assert.hpp>
-#include <silkworm/core/common/endian.hpp>
+#include "common/assert.hpp"
+#include "common/endian.hpp"
 
 namespace silkworm::trie {
 

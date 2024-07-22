@@ -19,7 +19,7 @@
 #include <cassert>
 #include <tuple>
 
-#include <silkworm/core/common/endian.hpp>
+#include "common/endian.hpp"
 
 namespace silkworm::rlp {
 

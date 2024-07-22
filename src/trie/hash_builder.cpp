@@ -22,10 +22,10 @@
 
 #include <ethash/keccak.hpp>
 
-#include <silkworm/core/common/assert.hpp>
-#include <silkworm/core/common/empty_hashes.hpp>
-#include <silkworm/core/common/util.hpp>
-#include <silkworm/core/rlp/encode.hpp>
+#include "common/assert.hpp"
+#include "common/empty_hashes.hpp"
+#include "common/util.hpp"
+#include "rlp/encode.hpp"
 
 namespace silkworm::trie {
 

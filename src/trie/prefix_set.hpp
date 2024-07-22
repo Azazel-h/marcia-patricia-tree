@@ -18,8 +18,8 @@
 
 #include <vector>
 
-#include <silkworm/core/common/base.hpp>
-#include <silkworm/core/common/bytes.hpp>
+#include "common/base.hpp"
+#include "common/bytes.hpp"
 
 namespace silkworm::trie {
 

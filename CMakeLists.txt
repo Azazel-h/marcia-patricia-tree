@@ -33,6 +33,7 @@ target_include_directories(${PROJECT_NAME}
         ${CMAKE_CURRENT_SOURCE_DIR}/external/ethash/include
         ${CMAKE_CURRENT_SOURCE_DIR}/external/evmone/include
         ${CMAKE_CURRENT_SOURCE_DIR}/external/evmone/evmc/include
+        ${CMAKE_CURRENT_SOURCE_DIR}/external/expected/include
         PUBLIC
         $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
         $<INSTALL_INTERFACE:${CMAKE_INSTALL_INCLUDEDIR}>
