@@ -1,4 +1,6 @@
 cmake_minimum_required(VERSION 3.28)
+
+set(HUNTER_ENABLED OFF CACHE BOOL "Disable Hunter package manager" FORCE)
 project(merkle-patricia-tree VERSION 1.0.0)
 
 set(CMAKE_CXX_STANDARD 20)
@@ -31,8 +33,7 @@ target_include_directories(${PROJECT_NAME}
         ${CMAKE_CURRENT_SOURCE_DIR}/src
         ${CMAKE_CURRENT_SOURCE_DIR}/external/intx/include
         ${CMAKE_CURRENT_SOURCE_DIR}/external/ethash/include
-        ${CMAKE_CURRENT_SOURCE_DIR}/external/evmone/include
-        ${CMAKE_CURRENT_SOURCE_DIR}/external/evmone/evmc/include
+        ${CMAKE_CURRENT_SOURCE_DIR}/external/evmc/include
         ${CMAKE_CURRENT_SOURCE_DIR}/external/expected/include
         PUBLIC
         $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
@@ -41,14 +42,11 @@ target_include_directories(${PROJECT_NAME}
 
 add_subdirectory(external/ethash)
 add_subdirectory(external/intx)
-set(ethash_DIR "${CMAKE_CURRENT_BINARY_DIR}/external/ethash/lib/cmake/ethash")
-add_subdirectory(external/evmone)
-add_dependencies(evmone ethash)
+add_subdirectory(external/evmc)
 
 
 target_link_libraries(${PROJECT_NAME}
         PRIVATE
-        evmone
         evmc
 )
 
