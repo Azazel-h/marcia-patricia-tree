@@ -39,9 +39,12 @@ target_include_directories(${PROJECT_NAME}
         $<INSTALL_INTERFACE:${CMAKE_INSTALL_INCLUDEDIR}>
 )
 
-#add_subdirectory(external/ethash)
-#add_subdirectory(external/intx)
-#add_subdirectory(external/evmone)
+add_subdirectory(external/ethash)
+add_subdirectory(external/intx)
+set(ethash_DIR "${CMAKE_CURRENT_BINARY_DIR}/external/ethash/lib/cmake/ethash")
+add_subdirectory(external/evmone)
+add_dependencies(evmone ethash)
+
 
 target_link_libraries(${PROJECT_NAME}
         PRIVATE
