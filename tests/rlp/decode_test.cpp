@@ -18,7 +18,7 @@
 
 #include <catch2/catch_test_macros.hpp>
 
-#include <silkworm/core/common/util.hpp>
+#include <common/util.hpp>
 
 #include "rlp/decode_vector.hpp"
 
