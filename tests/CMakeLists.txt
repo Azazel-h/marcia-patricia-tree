@@ -17,7 +17,7 @@ target_sources(merkle_patricia_tree_tests
 target_link_libraries(merkle_patricia_tree_tests
         PRIVATE
         merkle-patricia-tree  # Your main library
-        evmone
+        evmc
         Catch2::Catch2WithMain  # Catch2 library
 
 )
