@@ -8,7 +8,6 @@
 #include <iomanip>
 #include <iostream>
 
-
 namespace sm::lbr {
     void print_something();
 }
