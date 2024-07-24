@@ -17,8 +17,8 @@ $ cmake --build build
 > ```
 
 > [!IMPORTANT]
-> Be careful, if you use CLion or othe IDE with СMake and CTest integration,
-> run the mpt-tests to build them before using CTest.
+> Be **careful**, if you are using CLion or other IDE with _СMake/CTest_ integration,
+> run the **mpt-tests** to build them before using CTest.
 You can run tests with smth like
 ```bash
 $ ./build/mpt-tests
