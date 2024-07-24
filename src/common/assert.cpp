@@ -14,7 +14,7 @@
    limitations under the License.
 */
 
-#include "assert.hpp"
+#include "merkle-patricia-tree/common/assert.hpp"
 
 #include <cstdlib>
 #include <iostream>

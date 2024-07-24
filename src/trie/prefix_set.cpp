@@ -14,7 +14,7 @@
    limitations under the License.
 */
 
-#include "prefix_set.hpp"
+#include "merkle-patricia-tree/trie/prefix_set.hpp"
 
 #include <algorithm>
 #include <utility>

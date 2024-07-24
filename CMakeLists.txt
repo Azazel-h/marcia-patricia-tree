@@ -69,7 +69,7 @@ if (CMAKE_INSTALL_PREFIX_INITIALIZED_TO_DEFAULT)
 endif ()
 
 set(public_headers
-        include/some.h
+        include/merkle-patricia-tree/some.h
 )
 
 set_target_properties(${PROJECT_NAME} PROPERTIES

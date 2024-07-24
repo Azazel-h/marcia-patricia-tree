@@ -14,12 +14,12 @@
    limitations under the License.
 */
 
-#include "decode.hpp"
+#include "merkle-patricia-tree/rpl/decode.hpp"
 
 #include <cassert>
 #include <tuple>
 
-#include "common/endian.hpp"
+#include "merkle-patricia-tree/common/endian.hpp"
 
 namespace silkworm::rlp {
 

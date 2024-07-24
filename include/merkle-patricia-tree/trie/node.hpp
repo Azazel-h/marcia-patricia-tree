@@ -19,10 +19,10 @@
 #include <optional>
 #include <vector>
 
-#include <evmc/evmc.hpp>
+#include "evmc/evmc.hpp"
 
-#include "common/bytes.hpp"
-#include "common/decoding_result.hpp"
+#include "merkle-patricia-tree/common/bytes.hpp"
+#include "merkle-patricia-tree/common/decoding_result.hpp"
 
 namespace silkworm::trie {
 

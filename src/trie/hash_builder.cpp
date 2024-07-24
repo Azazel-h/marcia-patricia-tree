@@ -14,18 +14,17 @@
    limitations under the License.
 */
 
-#include "hash_builder.hpp"
 
 #include <bit>
 #include <cstring>
 #include <span>
-
 #include <ethash/keccak.hpp>
 
-#include "common/assert.hpp"
-#include "common/empty_hashes.hpp"
-#include "common/util.hpp"
-#include "rlp/encode.hpp"
+#include "merkle-patricia-tree/trie/hash_builder.hpp"
+#include "merkle-patricia-tree/common/assert.hpp"
+#include "merkle-patricia-tree/common/empty_hashes.hpp"
+#include "merkle-patricia-tree/common/util.hpp"
+#include "merkle-patricia-tree/rpl/encode.hpp"
 
 namespace silkworm::trie {
 

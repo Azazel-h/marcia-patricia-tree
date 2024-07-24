@@ -21,9 +21,9 @@
 #include <variant>
 #include <vector>
 
-#include "common/base.hpp"
-#include "common/bytes.hpp"
-#include "trie/node.hpp"
+#include "merkle-patricia-tree/common/base.hpp"
+#include "merkle-patricia-tree/common/bytes.hpp"
+#include "node.hpp"
 
 namespace silkworm::trie {
 

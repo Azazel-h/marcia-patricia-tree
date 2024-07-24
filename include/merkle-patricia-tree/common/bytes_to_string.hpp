@@ -20,8 +20,8 @@
 
 #include <string_view>
 
-#include "common/base.hpp"
-#include "common/bytes.hpp"
+#include "base.hpp"
+#include "bytes.hpp"
 
 namespace silkworm {
 

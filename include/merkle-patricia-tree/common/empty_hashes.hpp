@@ -16,7 +16,7 @@
 
 #pragma once
 
-#include <evmc/evmc.hpp>
+#include "evmc/evmc.hpp"
 
 namespace silkworm {
 

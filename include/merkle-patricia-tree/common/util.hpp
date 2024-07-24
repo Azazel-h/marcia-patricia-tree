@@ -25,11 +25,11 @@
 #include <string_view>
 #include <vector>
 
-#include <ethash/keccak.hpp>
-#include <intx/intx.hpp>
+#include "ethash/keccak.hpp"
+#include "intx/intx.hpp"
 
-#include "common/base.hpp"
-#include "common/bytes.hpp"
+#include "base.hpp"
+#include "bytes.hpp"
 
 // intx does not include operator<< overloading for uint<N>
 namespace intx {

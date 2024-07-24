@@ -23,12 +23,12 @@
 #include <cstring>
 #include <span>
 
-#include <intx/intx.hpp>
+#include "intx/intx.hpp"
 
-#include "common/base.hpp"
-#include "common/bytes.hpp"
-#include "common/decoding_result.hpp"
-#include "rlp/encode.hpp"
+#include "merkle-patricia-tree/common/base.hpp"
+#include "merkle-patricia-tree/common/bytes.hpp"
+#include "merkle-patricia-tree/common/decoding_result.hpp"
+#include "encode.hpp"
 
 namespace silkworm::rlp {
 

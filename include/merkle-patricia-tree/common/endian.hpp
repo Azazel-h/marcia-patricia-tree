@@ -24,11 +24,11 @@ See https://en.wikipedia.org/wiki/Endianness
 #include <cstdint>
 #include <cstring>
 
-#include <intx/intx.hpp>
+#include "intx/intx.hpp"
 
-#include "common/base.hpp"
-#include "common/bytes.hpp"
-#include "common/decoding_result.hpp"
+#include "base.hpp"
+#include "bytes.hpp"
+#include "decoding_result.hpp"
 
 namespace silkworm::endian {
 

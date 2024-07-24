@@ -14,13 +14,13 @@
    limitations under the License.
 */
 
-#include "node.hpp"
+#include "merkle-patricia-tree/trie/node.hpp"
 
 #include <bit>
 #include <utility>
 
-#include "common/assert.hpp"
-#include "common/endian.hpp"
+#include "merkle-patricia-tree/common/assert.hpp"
+#include "merkle-patricia-tree/common/endian.hpp"
 
 namespace silkworm::trie {
 

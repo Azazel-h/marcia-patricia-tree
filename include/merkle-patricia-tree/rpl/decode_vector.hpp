@@ -18,8 +18,8 @@
 
 #include <vector>
 
-#include <rlp/decode.hpp>
-#include <rlp/encode_vector.hpp>
+#include "decode.hpp"
+#include "encode_vector.hpp"
 
 namespace silkworm::rlp {
 

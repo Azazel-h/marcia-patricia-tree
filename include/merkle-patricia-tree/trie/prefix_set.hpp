@@ -18,8 +18,8 @@
 
 #include <vector>
 
-#include "common/base.hpp"
-#include "common/bytes.hpp"
+#include "merkle-patricia-tree/common/base.hpp"
+#include "merkle-patricia-tree/common/bytes.hpp"
 
 namespace silkworm::trie {
 

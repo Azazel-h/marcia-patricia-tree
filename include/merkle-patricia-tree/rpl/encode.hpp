@@ -19,10 +19,10 @@
 
 #pragma once
 
-#include <intx/intx.hpp>
-#include "common/base.hpp"
-#include "common/bytes.hpp"
-#include "common/endian.hpp"
+#include "intx/intx.hpp"
+#include "merkle-patricia-tree/common/base.hpp"
+#include "merkle-patricia-tree/common/bytes.hpp"
+#include "merkle-patricia-tree/common/endian.hpp"
 
 namespace silkworm::rlp {
 

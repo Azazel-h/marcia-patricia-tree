@@ -14,13 +14,12 @@
    limitations under the License.
 */
 
-#include "util.hpp"
 
 #include <algorithm>
 #include <cstdio>
 #include <regex>
-
-#include "common/assert.hpp"
+#include "merkle-patricia-tree/common/util.hpp"
+#include "merkle-patricia-tree/common/assert.hpp"
 
 namespace silkworm {
 

@@ -19,7 +19,7 @@
 #include <cstdint>
 #include <span>
 
-#include <evmc/bytes.hpp>
+#include "evmc/bytes.hpp"
 
 namespace silkworm {
 

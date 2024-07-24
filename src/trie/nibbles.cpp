@@ -14,7 +14,7 @@
    limitations under the License.
 */
 
-#include "nibbles.hpp"
+#include "merkle-patricia-tree/trie/nibbles.hpp"
 
 namespace silkworm::trie {
 

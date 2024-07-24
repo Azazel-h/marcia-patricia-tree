@@ -14,13 +14,11 @@
    limitations under the License.
 */
 
-#include "rlp/decode.hpp"
 
 #include <catch2/catch_test_macros.hpp>
-
-#include <common/util.hpp>
-
-#include "rlp/decode_vector.hpp"
+#include <merkle-patricia-tree/rpl/decode.hpp>
+#include <merkle-patricia-tree/common/util.hpp>
+#include <merkle-patricia-tree/rpl/decode_vector.hpp>
 
 namespace silkworm::rlp {
 

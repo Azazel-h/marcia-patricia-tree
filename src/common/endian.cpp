@@ -14,9 +14,8 @@
    limitations under the License.
 */
 
-#include "endian.hpp"
-
-#include "common/util.hpp"
+#include "merkle-patricia-tree/common/endian.hpp"
+#include "merkle-patricia-tree/common/util.hpp"
 
 namespace silkworm::endian {
 

@@ -20,7 +20,7 @@
 #include <span>
 #include <vector>
 
-#include <rlp/encode.hpp>
+#include "encode.hpp"
 
 namespace silkworm::rlp {
 
