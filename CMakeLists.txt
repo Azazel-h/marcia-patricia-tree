@@ -89,6 +89,9 @@ if (TRIE_BUILD_TESTING)
 
     target_link_libraries(mpt-tests
             merkle-patricia-tree  # Your main library
+            intx::intx
+            ethash::ethash
+            evmc
             Catch2::Catch2WithMain  # Catch2 library
     )
 
