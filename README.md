@@ -1,6 +1,6 @@
 # Merkle Patricia tree
 ```bash
-$ git clone git@github.com:Azazel-h/merkle-patricia-tree.git --recursive
+$ git clone https://github.com/Azazel-h/merkle-patricia-tree.git --recursive
 ```
 
 Clean building
