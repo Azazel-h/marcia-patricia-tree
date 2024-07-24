@@ -6,6 +6,7 @@ project(merkle-patricia-tree VERSION 1.0.0)
 set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_EXTENSIONS OFF)
+set(TRIE_BUILD_TESTING ON)
 
 if (NOT DEFINED namespace)
     set(namespace "mpt")
@@ -17,10 +18,10 @@ add_library(${PROJECT_NAME} STATIC)
 
 file(GLOB_RECURSE SILKWORM_CORE_SRC
         CONFIGURE_DEPENDS
-        "src/*.cpp"
-        "src/*.hpp"
-        "src/*.c"
-        "src/*.h"
+        "src/**/*.cpp"
+        "src/**/*.hpp"
+        "src/**/*.c"
+        "src/**/*.h"
 )
 
 target_sources(${PROJECT_NAME}
@@ -43,16 +44,10 @@ target_include_directories(${PROJECT_NAME}
 add_subdirectory(external/ethash)
 add_subdirectory(external/intx)
 add_subdirectory(external/evmc)
-
-
 target_link_libraries(${PROJECT_NAME}
         PRIVATE
         evmc
 )
-
-# Add Catch2
-add_subdirectory(external/catch2)
-add_subdirectory(tests)
 
 include(GNUInstallDirs)
 
@@ -63,8 +58,10 @@ if (CMAKE_INSTALL_PREFIX_INITIALIZED_TO_DEFAULT)
     )
 endif ()
 
-set(public_headers
-        include/merkle-patricia-tree/some.h
+
+file(GLOB_RECURSE public_headers
+        CONFIGURE_DEPENDS
+        "include/merkle-patricia-tree/**/*.hpp"
 )
 
 set_target_properties(${PROJECT_NAME} PROPERTIES
@@ -80,6 +77,44 @@ foreach (header ${public_headers})
             DESTINATION "${CMAKE_INSTALL_INCLUDEDIR}/${header_install_path}"
     )
 endforeach ()
+
+if (TRIE_BUILD_TESTING)
+    enable_testing()
+    add_subdirectory(external/catch2)
+    add_executable(mpt-tests)
+
+    file(GLOB_RECURSE TESTS_SRC
+            CONFIGURE_DEPENDS
+            "tests/**/*.cpp"
+    )
+
+    target_sources(mpt-tests
+            PRIVATE
+            ${TESTS_SRC}
+    )
+
+    target_link_libraries(mpt-tests
+            PRIVATE
+            merkle-patricia-tree  # Your main library
+            Catch2::Catch2WithMain  # Catch2 library
+    )
+
+    # Include directories if needed
+    target_include_directories(mpt-tests
+            PRIVATE
+            ${CMAKE_CURRENT_SOURCE_DIR}/src
+            ${CMAKE_CURRENT_SOURCE_DIR}/include
+            ${CMAKE_CURRENT_SOURCE_DIR}/external/intx/include
+            ${CMAKE_CURRENT_SOURCE_DIR}/external/ethash/include
+            ${CMAKE_CURRENT_SOURCE_DIR}/external/evmc/include
+            ${CMAKE_CURRENT_SOURCE_DIR}/external/expected/include
+    )
+
+    include(Catch)
+    include(CTest)
+
+    catch_discover_tests(mpt-tests)
+endif ()
 
 install(TARGETS ${PROJECT_NAME}
         EXPORT "${PROJECT_NAME}Targets"

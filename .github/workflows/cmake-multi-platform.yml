@@ -35,7 +35,7 @@ jobs:
         run: cmake --build build --config Debug -j$(nproc)
 
       - name: Test
-        run: ctest -C Debug --output-on-failure --verbose -j$(nproc) --test-dir build
+        run: ctest --verbose -j$(nproc) --test-dir build
 
   coverage:
     needs: build
