@@ -46,6 +46,8 @@ add_subdirectory(external/intx)
 add_subdirectory(external/evmc)
 target_link_libraries(${PROJECT_NAME}
         PRIVATE
+        intx::intx
+        ethash::ethash
         evmc
 )
 
@@ -89,9 +91,9 @@ if (TRIE_BUILD_TESTING)
 
     target_link_libraries(mpt-tests
             merkle-patricia-tree  # Your main library
-            intx::intx
-            ethash::ethash
-            evmc
+#            intx::intx
+#            ethash::ethash
+#            evmc
             Catch2::Catch2WithMain  # Catch2 library
     )
 
