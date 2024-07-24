@@ -15,36 +15,43 @@ jobs:
         shell: bash -l {0}
 
     steps:
-      - uses: actions/checkout@v2
-      - name: Update submodules
-        run: |
-          git submodule update --init --recursive
+      - uses: actions/checkout@v3
+        with:
+          submodules: 'recursive'
+
+      - uses: actions/cache@v3
+        with:
+          path: |
+            ~/.cmake
+            build
+          key: ${{ runner.os }}-cmake-${{ hashFiles('**/CMakeLists.txt') }}
+          restore-keys: |
+            ${{ runner.os }}-cmake-
 
       - name: Configure
-        run: |
-          cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Debug
+        run: cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Debug
 
       - name: Build
-        run: |
-          cmake --build build --config Debug
+        run: cmake --build build --config Debug -j$(nproc)
 
       - name: Test
-        run: |
-          cd build
-          ctest -C Debug --output-on-failure --verbose
+        run: ctest -C Debug --output-on-failure --verbose -j$(nproc) --test-dir build
 
+  coverage:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
       - name: Setup python
-        uses: actions/setup-python@v2
-        if: contains(matrix.os, 'ubuntu')
+        uses: actions/setup-python@v4
         with:
-          python-version: 3.8
-
-      - name: Upload code coverage to coveralls
-        if: contains(matrix.os, 'ubuntu')
-        env:
-          COVERALLS_REPO_TOKEN: ${{ secrets.COVERALLS_REPO_TOKEN }}
+          python-version: '3.8'
+      - name: Generate coverage info
         run: |
-          python -m venv foo
-          source foo/bin/activate
-          pip install --upgrade pip setuptools cpp-coveralls
-          coveralls -E ".*CMakeFiles.*" -E ".*test/.*.cpp.*" --exclude "foo" --exclude "build/_deps"
+          cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Debug -DENABLE_COVERAGE=ON
+          cmake --build build --config Debug
+          ctest -C Debug --test-dir build
+#      - name: Upload to Coveralls
+#        uses: coverallsapp/github-action@v2
+#        with:
+#          github-token: ${{ secrets.GITHUB_TOKEN }}
