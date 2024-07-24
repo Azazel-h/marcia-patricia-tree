@@ -62,6 +62,7 @@ endif ()
 file(GLOB_RECURSE public_headers
         CONFIGURE_DEPENDS
         "include/merkle-patricia-tree/**/*.hpp"
+        "include/merkle-patricia-tree/**/*.h"
 )
 
 set_target_properties(${PROJECT_NAME} PROPERTIES

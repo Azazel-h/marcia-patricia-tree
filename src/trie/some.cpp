@@ -1,7 +1,7 @@
 //
 // Created by Azazel on 21.07.2024.
 //
-#include "merkle-patricia-tree/some.h"
+#include "merkle-patricia-tree/trie/some.h"
 
 
 namespace sm::lbr {
