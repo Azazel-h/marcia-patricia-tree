@@ -19,39 +19,11 @@ jobs:
         with:
           submodules: 'recursive'
 
-      - uses: actions/cache@v3
-        with:
-          path: |
-            ~/.cmake
-            build
-          key: ${{ runner.os }}-cmake-${{ hashFiles('**/CMakeLists.txt') }}
-          restore-keys: |
-            ${{ runner.os }}-cmake-
-
       - name: Configure
-        run: cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Debug
+        run: cmake -S . -B build -DTRIE_BUILD_TESTING=ON
 
       - name: Build
-        run: cmake --build build --config Debug -j$(nproc)
+        run: cmake --build build
 
       - name: Test
         run: ctest --verbose -j$(nproc) --test-dir build
-
-  coverage:
-    needs: build
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
-      - name: Setup python
-        uses: actions/setup-python@v4
-        with:
-          python-version: '3.8'
-      - name: Generate coverage info
-        run: |
-          cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Debug -DENABLE_COVERAGE=ON
-          cmake --build build --config Debug
-          ctest -C Debug --test-dir build
-#      - name: Upload to Coveralls
-#        uses: coverallsapp/github-action@v2
-#        with:
-#          github-token: ${{ secrets.GITHUB_TOKEN }}
