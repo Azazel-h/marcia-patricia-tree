@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.28)
+cmake_minimum_required(VERSION 3.20)
 
 set(HUNTER_ENABLED OFF CACHE BOOL "Disable Hunter package manager" FORCE)
 project(merkle-patricia-tree VERSION 1.0.0)
@@ -50,13 +50,8 @@ target_link_libraries(${PROJECT_NAME}
         evmc
 )
 
-# Enable testing
-enable_testing()
-
 # Add Catch2
 add_subdirectory(external/catch2)
-
-# Add the tests subdirectory
 add_subdirectory(tests)
 
 include(GNUInstallDirs)

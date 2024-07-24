@@ -1,5 +1,5 @@
 # In tests/CMakeLists.txt
-add_executable(merkle_patricia_tree_tests)
+add_executable(tests)
 
 
 file(GLOB_RECURSE TESTS_SRC
@@ -9,20 +9,19 @@ file(GLOB_RECURSE TESTS_SRC
         "trie/*.cpp"
 )
 
-target_sources(merkle_patricia_tree_tests
+target_sources(tests
         PRIVATE
         ${TESTS_SRC}
 )
 
-target_link_libraries(merkle_patricia_tree_tests
+target_link_libraries(tests
         PRIVATE
         merkle-patricia-tree  # Your main library
         Catch2::Catch2WithMain  # Catch2 library
-
 )
 
 # Include directories if needed
-target_include_directories(merkle_patricia_tree_tests
+target_include_directories(tests
         PRIVATE
         ${CMAKE_CURRENT_SOURCE_DIR}/../src
         ${CMAKE_CURRENT_SOURCE_DIR}/../include
@@ -35,4 +34,4 @@ target_include_directories(merkle_patricia_tree_tests
 # Optional: Discover tests
 include(CTest)
 include(Catch)
-catch_discover_tests(merkle_patricia_tree_tests)
+catch_discover_tests(tests)

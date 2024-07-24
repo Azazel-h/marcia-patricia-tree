@@ -16,6 +16,9 @@ jobs:
 
     steps:
       - uses: actions/checkout@v2
+      - name: Update submodules
+        run: |
+          git submodule update --init --recursive
 
       - name: Configure
         run: |

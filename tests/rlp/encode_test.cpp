@@ -15,7 +15,6 @@
 */
 
 #include <catch2/catch_test_macros.hpp>
-
 #include <merkle-patricia-tree/common/util.hpp>
 #include <merkle-patricia-tree/rpl/encode_vector.hpp>
 
