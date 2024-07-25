@@ -3,8 +3,12 @@
 ```bash
 $ git clone https://github.com/Azazel-h/merkle-patricia-tree.git --recursive
 ```
+Updating submodules with:
+```bash
+$ git submodule update --init
+```
 
-Clean building
+### Clean building
 ```bash
 $ cmake -S . -B build
 $ cmake --build build
@@ -28,5 +32,3 @@ Or using CTest
 ```bash
 $ ctest --verbose -j$(nproc) --test-dir build
 ```
-
-git submodule update --init
