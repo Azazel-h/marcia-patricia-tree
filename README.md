@@ -28,3 +28,5 @@ Or using CTest
 ```bash
 $ ctest --verbose -j$(nproc) --test-dir build
 ```
+
+git submodule update --init
