@@ -173,16 +173,17 @@ silkworm_rlp_DecodingResult silkworm_rlp_decode_bool(silkworm_ByteView *from, bo
     }
 }
 
-silkworm_rlp_DecodingResult
-silkworm_rlp_decode_fixed_bytes(silkworm_ByteView *from, uint8_t *to, size_t length, silkworm_rlp_Leftover mode) {
-    silkworm::ByteView cpp_from{from->data, from->length};
-    std::span<uint8_t, std::dynamic_extent> cpp_to{to, length};
-    auto result = silkworm::rlp::decode(cpp_from, cpp_to, static_cast<silkworm::rlp::Leftover>(mode));
-    if (result) {
-        from->data = cpp_from.data();
-        from->length = cpp_from.length();
-        return {1, SILKWORM_DECODING_ERROR_OVERFLOW}; // Success, error value doesn't matter
-    } else {
-        return {0, static_cast<silkworm_DecodingError>(result.error())};
-    }
-}
+// TODO: FIX DECODING STATIC ASSERT ERROR!!!
+//silkworm_rlp_DecodingResult
+//silkworm_rlp_decode_fixed_bytes(silkworm_ByteView *from, uint8_t *to, size_t length, silkworm_rlp_Leftover mode) {
+//    silkworm::ByteView cpp_from{from->data, from->length};
+//    std::span<uint8_t, std::dynamic_extent> cpp_to{to, length};
+//    auto result = silkworm::rlp::decode(cpp_from, cpp_to, static_cast<silkworm::rlp::Leftover>(mode));
+//    if (result) {
+//        from->data = cpp_from.data();
+//        from->length = cpp_from.length();
+//        return {1, SILKWORM_DECODING_ERROR_OVERFLOW}; // Success, error value doesn't matter
+//    } else {
+//        return {0, static_cast<silkworm_DecodingError>(result.error())};
+//    }
+//}
