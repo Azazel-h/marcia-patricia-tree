@@ -11,5 +11,5 @@ namespace sm::lbr {
 }
 
 void print_something() {
-    sm::lbr::print_something()
+    sm::lbr::print_something();
 }
