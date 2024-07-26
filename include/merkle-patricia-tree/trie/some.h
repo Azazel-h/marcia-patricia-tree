@@ -19,7 +19,7 @@ namespace sm::lbr {
 extern "C" {
 #endif
 
-void print_something() { sm::lbr::print_something(); } ;
+void print_something();
 #ifdef __cplusplus
 }
 #endif
