@@ -13,8 +13,13 @@
    See the License for the specific language governing permissions and
    limitations under the License.
 */
+#ifndef SILKWORM_COMMON_UTILS_HPP_
+#define SILKWORM_COMMON_UTILS_HPP_
 
-#pragma once
+#include "base.hpp"
+#include "bytes.hpp"
+
+#ifdef __cplusplus
 
 #include <cmath>
 #include <cstring>
@@ -28,17 +33,16 @@
 #include "ethash/keccak.hpp"
 #include "intx/intx.hpp"
 
-#include "base.hpp"
-#include "bytes.hpp"
+
 
 // intx does not include operator<< overloading for uint<N>
 namespace intx {
 
-template <unsigned N>
-inline std::ostream& operator<<(std::ostream& out, const uint<N>& value) {
-    out << "0x" << intx::hex(value);
-    return out;
-}
+    template<unsigned N>
+    inline std::ostream &operator<<(std::ostream &out, const uint<N> &value) {
+        out << "0x" << intx::hex(value);
+        return out;
+    }
 
 }  // namespace intx
 
@@ -47,140 +51,172 @@ namespace silkworm {
 //! \brief Strips leftmost zeroed bytes from byte sequence
 //! \param [in] data : The view to process
 //! \return A new view of the sequence
-ByteView zeroless_view(ByteView data);
+    ByteView zeroless_view(ByteView data);
 
-inline bool has_hex_prefix(std::string_view s) {
-    return s.length() >= 2 && s[0] == '0' && (s[1] == 'x' || s[1] == 'X');
-}
-
-inline bool is_valid_hex(std::string_view s) {
-    static const std::regex hexRegex("^0x[0-9a-fA-F]+$");
-    return std::regex_match(s.data(), hexRegex);
-}
-
-inline bool is_valid_hash(std::string_view s) {
-    if (s.length() != 2 + kHashLength * 2) {
-        return false;
+    inline bool has_hex_prefix(std::string_view s) {
+        return s.length() >= 2 && s[0] == '0' && (s[1] == 'x' || s[1] == 'X');
     }
-    return is_valid_hex(s);
-}
 
-inline bool is_valid_address(std::string_view s) {
-    if (s.length() != 2 + kAddressLength * 2) {
-        return false;
+    inline bool is_valid_hex(std::string_view s) {
+        static const std::regex hexRegex("^0x[0-9a-fA-F]+$");
+        return std::regex_match(s.data(), hexRegex);
     }
-    return is_valid_hex(s);
-}
+
+    inline bool is_valid_hash(std::string_view s) {
+        if (s.length() != 2 + kHashLength * 2) {
+            return false;
+        }
+        return is_valid_hex(s);
+    }
+
+    inline bool is_valid_address(std::string_view s) {
+        if (s.length() != 2 + kAddressLength * 2) {
+            return false;
+        }
+        return is_valid_hex(s);
+    }
 
 //! \brief Returns a string representing the hex form of provided string of bytes
-std::string to_hex(ByteView bytes, bool with_prefix = false);
+    std::string to_hex(ByteView bytes, bool with_prefix = false);
 
 //! \brief Returns a string representing the hex form of provided integral
-template <typename T>
+    template<typename T>
     requires(std::is_integral_v<T> && std::is_unsigned_v<T>)
-std::string to_hex(T value, bool with_prefix = false) {
-    uint8_t bytes[sizeof(T)];
-    intx::be::store(bytes, value);
-    std::string hexed{to_hex(zeroless_view(bytes), with_prefix)};
-    if (hexed.length() == (with_prefix ? 2 : 0)) {
-        hexed += "00";
+    std::string to_hex(T value, bool with_prefix = false) {
+        uint8_t bytes[sizeof(T)];
+        intx::be::store(bytes, value);
+        std::string hexed{to_hex(zeroless_view(bytes), with_prefix)};
+        if (hexed.length() == (with_prefix ? 2 : 0)) {
+            hexed += "00";
+        }
+        return hexed;
     }
-    return hexed;
-}
 
 //! \brief Abridges a string to given length and eventually adds an ellipsis if input length is gt required length
-std::string abridge(std::string_view input, size_t length);
+    std::string abridge(std::string_view input, size_t length);
 
-std::optional<uint8_t> decode_hex_digit(char ch) noexcept;
+    std::optional<uint8_t> decode_hex_digit(char ch) noexcept;
 
-std::optional<Bytes> from_hex(std::string_view hex) noexcept;
+    std::optional<Bytes> from_hex(std::string_view hex) noexcept;
 
 // Parses a string input value representing a size in
 // human-readable format with qualifiers. eg "256MB"
-std::optional<uint64_t> parse_size(const std::string& sizestr);
+    std::optional<uint64_t> parse_size(const std::string &sizestr);
 
 // Converts a number of bytes in a human-readable format
-std::string human_size(uint64_t bytes, const char* unit = "B");
+    std::string human_size(uint64_t bytes, const char *unit = "B");
 
 // Compares two strings for equality with case insensitivity
-bool iequals(std::string_view a, std::string_view b);
+    bool iequals(std::string_view a, std::string_view b);
 
 // The length of the longest common prefix of a and b.
-size_t prefix_length(ByteView a, ByteView b);
+    size_t prefix_length(ByteView a, ByteView b);
 
-inline ethash::hash256 keccak256(ByteView view) { return ethash::keccak256(view.data(), view.size()); }
+    inline ethash::hash256 keccak256(ByteView view) { return ethash::keccak256(view.data(), view.size()); }
 
 //! \brief Create an intx::uint256 from a string supporting both fixed decimal and scientific notation
-template <UnsignedIntegral Int>
-constexpr Int from_string_sci(const char* str) {
-    auto s = str;
-    auto m = Int{};
+    template<UnsignedIntegral Int>
+    constexpr Int from_string_sci(const char *str) {
+        auto s = str;
+        auto m = Int{};
 
-    int num_digits = 0;
-    int num_decimal_digits = 0;
-    bool count_decimals{false};
-    char c = 0;
-    while ((c = *s++)) {
-        if (c == '.') {
-            count_decimals = true;
-            continue;
+        int num_digits = 0;
+        int num_decimal_digits = 0;
+        bool count_decimals{false};
+        char c = 0;
+        while ((c = *s++)) {
+            if (c == '.') {
+                count_decimals = true;
+                continue;
+            }
+            if (c == 'e') {
+                if (*s++ != '+') intx::throw_<std::out_of_range>(s);
+                break;
+            }
+            if (num_digits++ > std::numeric_limits<Int>::digits10) {
+                intx::throw_<std::out_of_range>(s);
+            }
+            if (count_decimals) {
+                ++num_decimal_digits;
+            }
+
+            const auto d = intx::from_dec_digit(c);
+            m = m * Int{10} + d;
+            if (m < d) {
+                intx::throw_<std::out_of_range>(s);
+            }
         }
-        if (c == 'e') {
-            if (*s++ != '+') intx::throw_<std::out_of_range>(s);
-            break;
-        }
-        if (num_digits++ > std::numeric_limits<Int>::digits10) {
+        if (!c) {
+            if (num_decimal_digits == 0) return m;
             intx::throw_<std::out_of_range>(s);
         }
-        if (count_decimals) {
-            ++num_decimal_digits;
-        }
 
-        const auto d = intx::from_dec_digit(c);
-        m = m * Int{10} + d;
-        if (m < d) {
+        int e = 0;
+        while ((c = *s++)) {
+            const auto d = intx::from_dec_digit(c);
+            e = e * 10 + d;
+            if (e < d) {
+                intx::throw_<std::out_of_range>(s);
+            }
+        }
+        if (e < num_decimal_digits) {
             intx::throw_<std::out_of_range>(s);
         }
-    }
-    if (!c) {
-        if (num_decimal_digits == 0) return m;
-        intx::throw_<std::out_of_range>(s);
-    }
 
-    int e = 0;
-    while ((c = *s++)) {
-        const auto d = intx::from_dec_digit(c);
-        e = e * 10 + d;
-        if (e < d) {
-            intx::throw_<std::out_of_range>(s);
+        auto x = m;
+        auto exp = e - num_decimal_digits;
+        while (exp > 0) {
+            x *= Int{10};
+            --exp;
         }
-    }
-    if (e < num_decimal_digits) {
-        intx::throw_<std::out_of_range>(s);
+        return x;
     }
 
-    auto x = m;
-    auto exp = e - num_decimal_digits;
-    while (exp > 0) {
-        x *= Int{10};
-        --exp;
+    inline std::ostream &operator<<(std::ostream &out, ByteView bytes) {
+        for (const auto &b: bytes) {
+            out << std::hex << std::setw(2) << std::setfill('0') << int(b);
+        }
+        out << std::dec;
+        return out;
     }
-    return x;
-}
 
-inline std::ostream& operator<<(std::ostream& out, ByteView bytes) {
-    for (const auto& b : bytes) {
-        out << std::hex << std::setw(2) << std::setfill('0') << int(b);
+    inline std::ostream &operator<<(std::ostream &out, const Bytes &bytes) {
+        out << to_hex(bytes);
+        return out;
     }
-    out << std::dec;
-    return out;
-}
 
-inline std::ostream& operator<<(std::ostream& out, const Bytes& bytes) {
-    out << to_hex(bytes);
-    return out;
-}
-
-float to_float(const intx::uint256&) noexcept;
+    float to_float(const intx::uint256 &) noexcept;
 
 }  // namespace silkworm
+#endif
+
+// C interface
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+#include <stdint.h>
+#include <stdbool.h>
+
+silkworm_ByteView silkworm_zeroless_view(silkworm_ByteView data);
+bool silkworm_has_hex_prefix(const char *s, size_t length);
+bool silkworm_is_valid_hex(const char *s, size_t length);
+bool silkworm_is_valid_hash(const char *s, size_t length);
+bool silkworm_is_valid_address(const char *s, size_t length);
+char *silkworm_to_hex(silkworm_ByteView bytes, bool with_prefix);
+char *silkworm_abridge(const char *input, size_t input_length, size_t max_length);
+int silkworm_decode_hex_digit(char ch);
+silkworm_ByteView silkworm_from_hex(const char *hex, size_t length);
+uint64_t silkworm_parse_size(const char *sizestr);
+char *silkworm_human_size(uint64_t bytes, const char *unit);
+bool silkworm_iequals(const char *a, size_t a_length, const char *b, size_t b_length);
+size_t silkworm_prefix_length(silkworm_ByteView a, silkworm_ByteView b);
+void silkworm_keccak256(silkworm_ByteView view, uint8_t result[32]);
+uint64_t silkworm_from_string_sci(const char *str);
+float silkworm_to_float(uint64_t value);
+
+#ifdef __cplusplus
+}
+#endif
+
+#endif // SILKWORM_COMMON_UTILS_HPP_
