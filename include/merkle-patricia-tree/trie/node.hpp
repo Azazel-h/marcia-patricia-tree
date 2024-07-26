@@ -1,3 +1,8 @@
+#ifndef SILKWORM_NODE_HPP_
+#define SILKWORM_NODE_HPP_
+
+#ifdef __cplusplus
+
 /*
    Copyright 2022 The Silkworm Authors
 
@@ -73,3 +78,65 @@ class Node {
 inline bool is_subset(uint16_t sub, uint16_t sup) { return (sub & sup) == sub; }
 
 }  // namespace silkworm::trie
+
+#endif // __cplusplus
+
+// C interface
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+#include <stdint.h>
+#include <stdbool.h>
+
+typedef struct silkworm_Node silkworm_Node;
+
+silkworm_Node* silkworm_Node_create();
+void silkworm_Node_destroy(silkworm_Node* node);
+
+silkworm_Node* silkworm_Node_create_with_params(uint16_t state_mask, uint16_t tree_mask, uint16_t hash_mask,
+                                                const silkworm_Bytes* hashes, size_t hashes_count,
+                                                const uint8_t* root_hash);
+
+uint16_t silkworm_Node_state_mask(const silkworm_Node* node);
+uint16_t silkworm_Node_tree_mask(const silkworm_Node* node);
+uint16_t silkworm_Node_hash_mask(const silkworm_Node* node);
+
+size_t silkworm_Node_hashes_count(const silkworm_Node* node);
+const uint8_t* silkworm_Node_hash_at(const silkworm_Node* node, size_t index);
+
+bool silkworm_Node_has_root_hash(const silkworm_Node* node);
+const uint8_t* silkworm_Node_root_hash(const silkworm_Node* node);
+
+void silkworm_Node_set_root_hash(silkworm_Node* node, const uint8_t* root_hash);
+
+silkworm_Bytes silkworm_Node_encode_for_storage(const silkworm_Node* node);
+
+typedef enum {
+    SILKWORM_OK = 0,
+    SILKWORM_ERROR_OVERFLOW,
+    SILKWORM_ERROR_LEADING_ZERO,
+    SILKWORM_ERROR_INPUT_TOO_SHORT,
+    SILKWORM_ERROR_INPUT_TOO_LONG,
+    SILKWORM_ERROR_NON_CANONICAL_SIZE,
+    SILKWORM_ERROR_UNEXPECTED_LENGTH,
+    SILKWORM_ERROR_UNEXPECTED_STRING,
+    SILKWORM_ERROR_UNEXPECTED_LIST,
+    SILKWORM_ERROR_UNEXPECTED_LIST_ELEMENTS,
+    SILKWORM_ERROR_INVALID_V_IN_SIGNATURE,
+    SILKWORM_ERROR_UNSUPPORTED_TRANSACTION_TYPE,
+    SILKWORM_ERROR_INVALID_FIELDSET,
+    SILKWORM_ERROR_UNEXPECTED_EIP2718_SERIALIZATION,
+    SILKWORM_ERROR_INVALID_HASHES_LENGTH,
+    SILKWORM_ERROR_INVALID_MASKS_SUBSETS
+} silkworm_DecodingError;
+
+silkworm_DecodingError silkworm_Node_decode_from_storage(const silkworm_ByteView* raw, silkworm_Node* node);
+
+bool silkworm_is_subset(uint16_t sub, uint16_t sup);
+
+#ifdef __cplusplus
+}
+#endif
+
+#endif // SILKWORM_NODE_HPP_
