@@ -92,10 +92,6 @@ namespace silkworm::rlp {
 extern "C" {
 #endif
 
-typedef struct {
-    uint8_t list;
-    uint64_t payload_length;
-} silkworm_rlp_Header;
 
 typedef enum {
     SILKWORM_RLP_LEFTOVER_PROHIBIT,

@@ -83,8 +83,8 @@ extern "C" {
 #endif
 
 typedef struct {
-    bool list;
-    size_t payload_length;
+    int list;
+    uint64_t payload_length;
 } silkworm_rlp_Header;
 
 extern const uint8_t silkworm_rlp_kEmptyStringCode;
