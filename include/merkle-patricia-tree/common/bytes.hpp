@@ -1,5 +1,5 @@
-#ifndef SILKWORM_BYTES_HPP_
-#define SILKWORM_BYTES_HPP_
+#ifndef SILKWORM_BYTES_HPP
+#define SILKWORM_BYTES_HPP
 
 #ifdef __cplusplus
 

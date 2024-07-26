@@ -1,5 +1,5 @@
-#ifndef SILKWORM_BASE_HPP_
-#define SILKWORM_BASE_HPP_
+#ifndef SILKWORM_BASE_HPP
+#define SILKWORM_BASE_HPP
 
 #ifdef __cplusplus
 /*
@@ -113,7 +113,7 @@ uint64_t silkworm_to_tebi(uint64_t x);
 }
 #endif
 
-#endif // SILKWORM_BASE_HPP_
+#endif // SILKWORM_BASE_HPP
 
 /*
     В этой версии файла:

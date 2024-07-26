@@ -13,8 +13,8 @@
    See the License for the specific language governing permissions and
    limitations under the License.
 */
-#ifndef SILKWORM_COMMON_UTILS_HPP_
-#define SILKWORM_COMMON_UTILS_HPP_
+#ifndef SILKWORM_COMMON_UTILS_HPP
+#define SILKWORM_COMMON_UTILS_HPP
 
 #include "base.hpp"
 #include "bytes.hpp"
@@ -219,4 +219,4 @@ float silkworm_to_float(uint64_t value);
 }
 #endif
 
-#endif // SILKWORM_COMMON_UTILS_HPP_
+#endif // SILKWORM_COMMON_UTILS_HPP

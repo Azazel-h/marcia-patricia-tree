@@ -7,7 +7,11 @@
 #include <iomanip>
 #include <iostream>
 
+
 namespace sm::lbr {
+#ifdef __cplusplus
+    extern "C"
+#endif
     void print_something();
 }
 

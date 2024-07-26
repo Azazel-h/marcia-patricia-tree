@@ -58,3 +58,51 @@ size_t length(ByteView s) noexcept {
 }
 
 }  // namespace silkworm::rlp
+
+// rlp_encode_wrapper.cpp
+
+const uint8_t silkworm_rlp_kEmptyStringCode = silkworm::rlp::kEmptyStringCode;
+const uint8_t silkworm_rlp_kEmptyListCode = silkworm::rlp::kEmptyListCode;
+
+void silkworm_rlp_encode_header(silkworm_Bytes* to, silkworm_rlp_Header header) {
+    silkworm::Bytes cpp_to(to->data, to->length);
+    silkworm::rlp::Header cpp_header{header.list, header.payload_length};
+    silkworm::rlp::encode_header(cpp_to, cpp_header);
+    to->length = cpp_to.length();
+}
+
+void silkworm_rlp_encode_bytes(silkworm_Bytes* to, silkworm_ByteView str) {
+    silkworm::Bytes cpp_to(to->data, to->length);
+    silkworm::ByteView cpp_str(str.data, str.length);
+    silkworm::rlp::encode(cpp_to, cpp_str);
+    to->length = cpp_to.length();
+}
+
+void silkworm_rlp_encode_uint(silkworm_Bytes* to, uint64_t n) {
+    silkworm::Bytes cpp_to(to->data, to->length);
+    silkworm::rlp::encode(cpp_to, n);
+    to->length = cpp_to.length();
+}
+
+void silkworm_rlp_encode_bool(silkworm_Bytes* to, int value) {
+    silkworm::Bytes cpp_to(to->data, to->length);
+    silkworm::rlp::encode(cpp_to, value != 0);
+    to->length = cpp_to.length();
+}
+
+size_t silkworm_rlp_length_of_length(uint64_t payload_length) {
+    return silkworm::rlp::length_of_length(payload_length);
+}
+
+size_t silkworm_rlp_length_of_bytes(silkworm_ByteView bytes) {
+    silkworm::ByteView cpp_bytes(bytes.data, bytes.length);
+    return silkworm::rlp::length(cpp_bytes);
+}
+
+size_t silkworm_rlp_length_of_uint(uint64_t n) {
+    return silkworm::rlp::length(n);
+}
+
+size_t silkworm_rlp_length_of_bool(void) {
+    return silkworm::rlp::length(true);
+}

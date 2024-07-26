@@ -1,5 +1,5 @@
-#ifndef SILKWORM_COMMON_HPP_
-#define SILKWORM_COMMON_HPP_
+#ifndef SILKWORM_COMMON_HPP
+#define SILKWORM_COMMON_HPP
 
 #ifdef __cplusplus
 
@@ -62,4 +62,4 @@ silkworm_bytes32 silkworm_get_empty_root();
 }
 #endif
 
-#endif // SILKWORM_COMMON_HPP_
+#endif // SILKWORM_COMMON_HPP

@@ -1,5 +1,5 @@
-#ifndef SILKWORM_ENDIAN_HPP_
-#define SILKWORM_ENDIAN_HPP_
+#ifndef SILKWORM_ENDIAN_HPP
+#define SILKWORM_ENDIAN_HPP
 
 #ifdef __cplusplus
 
@@ -160,4 +160,4 @@ silkworm_DecodingResult silkworm_endian_from_big_compact_u256(const silkworm_Byt
 }
 #endif
 
-#endif // SILKWORM_ENDIAN_HPP_
+#endif // SILKWORM_ENDIAN_HPP

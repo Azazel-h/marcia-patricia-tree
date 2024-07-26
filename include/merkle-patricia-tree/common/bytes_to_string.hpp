@@ -1,5 +1,5 @@
-#ifndef SILKWORM_BYTES_TO_STRING_HPP_
-#define SILKWORM_BYTES_TO_STRING_HPP_
+#ifndef SILKWORM_BYTES_TO_STRING_HPP
+#define SILKWORM_BYTES_TO_STRING_HPP
 
 #ifdef __cplusplus
 
@@ -78,4 +78,4 @@ silkworm_StringView silkworm_byte_view_to_string_view(silkworm_ByteView view);
 }
 #endif
 
-#endif // SILKWORM_BYTES_TO_STRING_HPP_
+#endif // SILKWORM_BYTES_TO_STRING_HPP

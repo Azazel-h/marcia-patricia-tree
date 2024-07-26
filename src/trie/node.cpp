@@ -1,20 +1,3 @@
-#ifdef __cplusplus
-/*
-   Copyright 2022 The Silkworm Authors
-
-   Licensed under the Apache License, Version 2.0 (the "License");
-   you may not use this file except in compliance with the License.
-   You may obtain a copy of the License at
-
-       http://www.apache.org/licenses/LICENSE-2.0
-
-   Unless required by applicable law or agreed to in writing, software
-   distributed under the License is distributed on an "AS IS" BASIS,
-   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-   See the License for the specific language governing permissions and
-   limitations under the License.
-*/
-
 #include "merkle-patricia-tree/trie/node.hpp"
 
 #include <bit>
@@ -107,11 +90,6 @@ DecodingResult Node::decode_from_storage(ByteView raw, Node& node) {
 }
 
 }  // namespace silkworm::trie
-
-#endif
-
-// C interface implementation
-extern "C" {
 
 struct silkworm_Node {
     silkworm::trie::Node cpp_node;
@@ -213,5 +191,3 @@ silkworm_DecodingResult silkworm_Node_decode_from_storage(const silkworm_ByteVie
 bool silkworm_is_subset(uint16_t sub, uint16_t sup) {
     return silkworm::trie::is_subset(sub, sup);
 }
-
-} // extern "C"
