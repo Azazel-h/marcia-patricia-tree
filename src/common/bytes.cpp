@@ -1,9 +1,7 @@
 #include "merkle-patricia-tree/common/bytes.hpp"
 #include <cstdlib>
 #include <cstring>
-//#include <new>
-
-extern "C" {
+#include <new>
 
 silkworm_ByteView silkworm_ByteView_create(const uint8_t* data, size_t length) {
     silkworm_ByteView view;
@@ -74,8 +72,6 @@ silkworm_ByteSpan silkworm_ByteSpan_create(uint8_t* data, size_t length) {
     span.length = length;
     return span;
 }
-
-} // extern "C"
 
 /*
     Эта реализация предоставляет следующую функциональность:

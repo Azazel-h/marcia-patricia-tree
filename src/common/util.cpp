@@ -262,105 +262,103 @@ namespace silkworm {
         res = k2_64 * res + static_cast<float>(words[0]);
         return res;
     }
+}  // namespace silkworm
 
-//
-    silkworm_ByteView silkworm_zeroless_view(silkworm_ByteView data) {
-        auto cpp_view = silkworm::ByteView(data.data, data.length);
-        auto result = silkworm::zeroless_view(cpp_view);
-        return {result.data(), result.length()};
-    }
+silkworm_ByteView silkworm_zeroless_view(silkworm_ByteView data) {
+    auto cpp_view = silkworm::ByteView(data.data, data.length);
+    auto result = silkworm::zeroless_view(cpp_view);
+    return {result.data(), result.length()};
+}
 
-    bool silkworm_has_hex_prefix(const char *s, size_t length) {
-        return silkworm::has_hex_prefix(std::string_view(s, length));
-    }
+bool silkworm_has_hex_prefix(const char *s, size_t length) {
+    return silkworm::has_hex_prefix(std::string_view(s, length));
+}
 
-    bool silkworm_is_valid_hex(const char *s, size_t length) {
-        return silkworm::is_valid_hex(std::string_view(s, length));
-    }
+bool silkworm_is_valid_hex(const char *s, size_t length) {
+    return silkworm::is_valid_hex(std::string_view(s, length));
+}
 
-    bool silkworm_is_valid_hash(const char *s, size_t length) {
-        return silkworm::is_valid_hash(std::string_view(s, length));
-    }
+bool silkworm_is_valid_hash(const char *s, size_t length) {
+    return silkworm::is_valid_hash(std::string_view(s, length));
+}
 
-    bool silkworm_is_valid_address(const char *s, size_t length) {
-        return silkworm::is_valid_address(std::string_view(s, length));
-    }
+bool silkworm_is_valid_address(const char *s, size_t length) {
+    return silkworm::is_valid_address(std::string_view(s, length));
+}
 
-    char *silkworm_to_hex(silkworm_ByteView bytes, bool with_prefix) {
-        auto cpp_view = silkworm::ByteView(bytes.data, bytes.length);
-        std::string result = silkworm::to_hex(cpp_view, with_prefix);
-        char *c_str = new char[result.length() + 1];
-        std::strcpy(c_str, result.c_str());
-        return c_str;
-    }
+char *silkworm_to_hex(silkworm_ByteView bytes, bool with_prefix) {
+    auto cpp_view = silkworm::ByteView(bytes.data, bytes.length);
+    std::string result = silkworm::to_hex(cpp_view, with_prefix);
+    char *c_str = new char[result.length() + 1];
+    std::strcpy(c_str, result.c_str());
+    return c_str;
+}
 
-    char *silkworm_abridge(const char *input, size_t input_length, size_t max_length) {
-        std::string_view sv(input, input_length);
-        std::string result = silkworm::abridge(sv, max_length);
-        char *c_str = new char[result.length() + 1];
-        std::strcpy(c_str, result.c_str());
-        return c_str;
-    }
+char *silkworm_abridge(const char *input, size_t input_length, size_t max_length) {
+    std::string_view sv(input, input_length);
+    std::string result = silkworm::abridge(sv, max_length);
+    char *c_str = new char[result.length() + 1];
+    std::strcpy(c_str, result.c_str());
+    return c_str;
+}
 
-    int silkworm_decode_hex_digit(char ch) {
-        auto result = silkworm::decode_hex_digit(ch);
-        return result ? static_cast<int>(*result) : -1;
-    }
+int silkworm_decode_hex_digit(char ch) {
+    auto result = silkworm::decode_hex_digit(ch);
+    return result ? static_cast<int>(*result) : -1;
+}
 
-    silkworm_ByteView silkworm_from_hex(const char *hex, size_t length) {
-        std::string_view sv(hex, length);
-        auto result = silkworm::from_hex(sv);
-        if (!result) {
-            return {nullptr, 0};
-        }
-        // Note: This is dangerous as the data might be deallocated.
-        // Consider changing the API to return a silkworm_Bytes instead.
-        return {result->data(), result->size()};
+silkworm_ByteView silkworm_from_hex(const char *hex, size_t length) {
+    std::string_view sv(hex, length);
+    auto result = silkworm::from_hex(sv);
+    if (!result) {
+        return {nullptr, 0};
     }
+    // Note: This is dangerous as the data might be deallocated.
+    // Consider changing the API to return a silkworm_Bytes instead.
+    return {result->data(), result->size()};
+}
 
-    uint64_t silkworm_parse_size(const char *sizestr) {
-        auto result = silkworm::parse_size(sizestr);
-        return result ? *result : 0;
-    }
+uint64_t silkworm_parse_size(const char *sizestr) {
+    auto result = silkworm::parse_size(sizestr);
+    return result ? *result : 0;
+}
 
-    char *silkworm_human_size(uint64_t bytes, const char *unit) {
-        std::string result = silkworm::human_size(bytes, unit);
-        char *c_str = new char[result.length() + 1];
-        std::strcpy(c_str, result.c_str());
-        return c_str;
-    }
+char *silkworm_human_size(uint64_t bytes, const char *unit) {
+    std::string result = silkworm::human_size(bytes, unit);
+    char *c_str = new char[result.length() + 1];
+    std::strcpy(c_str, result.c_str());
+    return c_str;
+}
 
-    bool silkworm_iequals(const char *a, size_t a_length, const char *b, size_t b_length) {
-        std::string_view sv_a(a, a_length);
-        std::string_view sv_b(b, b_length);
-        return silkworm::iequals(sv_a, sv_b);
-    }
+bool silkworm_iequals(const char *a, size_t a_length, const char *b, size_t b_length) {
+    std::string_view sv_a(a, a_length);
+    std::string_view sv_b(b, b_length);
+    return silkworm::iequals(sv_a, sv_b);
+}
 
-    size_t silkworm_prefix_length(silkworm_ByteView a, silkworm_ByteView b) {
-        auto cpp_view_a = silkworm::ByteView(a.data, a.length);
-        auto cpp_view_b = silkworm::ByteView(b.data, b.length);
-        return silkworm::prefix_length(cpp_view_a, cpp_view_b);
-    }
+size_t silkworm_prefix_length(silkworm_ByteView a, silkworm_ByteView b) {
+    auto cpp_view_a = silkworm::ByteView(a.data, a.length);
+    auto cpp_view_b = silkworm::ByteView(b.data, b.length);
+    return silkworm::prefix_length(cpp_view_a, cpp_view_b);
+}
 
-    void silkworm_keccak256(silkworm_ByteView view, uint8_t result[32]) {
-        auto cpp_view = silkworm::ByteView(view.data, view.length);
-        auto hash = silkworm::keccak256(cpp_view);
-        std::memcpy(result, hash.bytes, 32);
-    }
+void silkworm_keccak256(silkworm_ByteView view, uint8_t result[32]) {
+    auto cpp_view = silkworm::ByteView(view.data, view.length);
+    auto hash = silkworm::keccak256(cpp_view);
+    std::memcpy(result, hash.bytes, 32);
+}
 
-    uint64_t silkworm_from_string_sci(const char *str) {
-        // This is a simplified version, as the original function returns uint256
-        return silkworm::from_string_sci<uint64_t>(str);
-    }
+uint64_t silkworm_from_string_sci(const char *str) {
+    // This is a simplified version, as the original function returns uint256
+    return silkworm::from_string_sci<uint64_t>(str);
+}
 
-    float silkworm_to_float(uint64_t value) {
-        // This is a simplified version, as the original function takes uint256
-        return static_cast<float>(value);
-    }
+float silkworm_to_float(uint64_t value) {
+    // This is a simplified version, as the original function takes uint256
+    return static_cast<float>(value);
+}
 
 // Function to free memory allocated by C interface functions
-    void silkworm_free_string(char *str) {
-        delete[] str;
-    }
-
-}  // namespace silkworm
+void silkworm_free_string(char *str) {
+    delete[] str;
+}
