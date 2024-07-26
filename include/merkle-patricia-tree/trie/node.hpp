@@ -88,6 +88,8 @@ extern "C" {
 
 #include <stdint.h>
 #include <stdbool.h>
+#include "merkle-patricia-tree/common/bytes.hpp"
+#include "merkle-patricia-tree/common/decoding_result.hpp"
 
 typedef struct silkworm_Node silkworm_Node;
 
@@ -112,26 +114,7 @@ void silkworm_Node_set_root_hash(silkworm_Node* node, const uint8_t* root_hash);
 
 silkworm_Bytes silkworm_Node_encode_for_storage(const silkworm_Node* node);
 
-typedef enum {
-    SILKWORM_OK = 0,
-    SILKWORM_ERROR_OVERFLOW,
-    SILKWORM_ERROR_LEADING_ZERO,
-    SILKWORM_ERROR_INPUT_TOO_SHORT,
-    SILKWORM_ERROR_INPUT_TOO_LONG,
-    SILKWORM_ERROR_NON_CANONICAL_SIZE,
-    SILKWORM_ERROR_UNEXPECTED_LENGTH,
-    SILKWORM_ERROR_UNEXPECTED_STRING,
-    SILKWORM_ERROR_UNEXPECTED_LIST,
-    SILKWORM_ERROR_UNEXPECTED_LIST_ELEMENTS,
-    SILKWORM_ERROR_INVALID_V_IN_SIGNATURE,
-    SILKWORM_ERROR_UNSUPPORTED_TRANSACTION_TYPE,
-    SILKWORM_ERROR_INVALID_FIELDSET,
-    SILKWORM_ERROR_UNEXPECTED_EIP2718_SERIALIZATION,
-    SILKWORM_ERROR_INVALID_HASHES_LENGTH,
-    SILKWORM_ERROR_INVALID_MASKS_SUBSETS
-} silkworm_DecodingError;
-
-silkworm_DecodingError silkworm_Node_decode_from_storage(const silkworm_ByteView* raw, silkworm_Node* node);
+silkworm_DecodingResult silkworm_Node_decode_from_storage(const silkworm_ByteView* raw, silkworm_Node* node);
 
 bool silkworm_is_subset(uint16_t sub, uint16_t sup);
 

@@ -197,30 +197,17 @@ silkworm_Bytes silkworm_Node_encode_for_storage(const silkworm_Node* node) {
     return result;
 }
 
-silkworm_DecodingError silkworm_Node_decode_from_storage(const silkworm_ByteView* raw, silkworm_Node* node) {
+silkworm_DecodingResult silkworm_Node_decode_from_storage(const silkworm_ByteView* raw, silkworm_Node* node) {
     silkworm::ByteView cpp_raw(raw->data, raw->length);
     auto result = silkworm::trie::Node::decode_from_storage(cpp_raw, node->cpp_node);
+    silkworm_DecodingResult c_result;
     if (result) {
-        return SILKWORM_OK;
+        c_result.has_error = 0;
+    } else {
+        c_result.has_error = 1;
+        c_result.error = static_cast<silkworm_DecodingError>(result.error());
     }
-    switch (result.error()) {
-        case silkworm::DecodingError::kOverflow: return SILKWORM_ERROR_OVERFLOW;
-        case silkworm::DecodingError::kLeadingZero: return SILKWORM_ERROR_LEADING_ZERO;
-        case silkworm::DecodingError::kInputTooShort: return SILKWORM_ERROR_INPUT_TOO_SHORT;
-        case silkworm::DecodingError::kInputTooLong: return SILKWORM_ERROR_INPUT_TOO_LONG;
-        case silkworm::DecodingError::kNonCanonicalSize: return SILKWORM_ERROR_NON_CANONICAL_SIZE;
-        case silkworm::DecodingError::kUnexpectedLength: return SILKWORM_ERROR_UNEXPECTED_LENGTH;
-        case silkworm::DecodingError::kUnexpectedString: return SILKWORM_ERROR_UNEXPECTED_STRING;
-        case silkworm::DecodingError::kUnexpectedList: return SILKWORM_ERROR_UNEXPECTED_LIST;
-        case silkworm::DecodingError::kUnexpectedListElements: return SILKWORM_ERROR_UNEXPECTED_LIST_ELEMENTS;
-        case silkworm::DecodingError::kInvalidVInSignature: return SILKWORM_ERROR_INVALID_V_IN_SIGNATURE;
-        case silkworm::DecodingError::kUnsupportedTransactionType: return SILKWORM_ERROR_UNSUPPORTED_TRANSACTION_TYPE;
-        case silkworm::DecodingError::kInvalidFieldset: return SILKWORM_ERROR_INVALID_FIELDSET;
-        case silkworm::DecodingError::kUnexpectedEip2718Serialization: return SILKWORM_ERROR_UNEXPECTED_EIP2718_SERIALIZATION;
-        case silkworm::DecodingError::kInvalidHashesLength: return SILKWORM_ERROR_INVALID_HASHES_LENGTH;
-        case silkworm::DecodingError::kInvalidMasksSubsets: return SILKWORM_ERROR_INVALID_MASKS_SUBSETS;
-        default: return SILKWORM_ERROR_UNEXPECTED_LIST;  // Fallback error
-    }
+    return c_result;
 }
 
 bool silkworm_is_subset(uint16_t sub, uint16_t sup) {
