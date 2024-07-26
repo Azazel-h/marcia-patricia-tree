@@ -2,6 +2,7 @@
 // Created by Azazel on 21.07.2024.
 //
 
+#ifdef __cplusplus
 #pragma once
 
 #include <iomanip>
@@ -9,9 +10,7 @@
 
 
 namespace sm::lbr {
-#ifdef __cplusplus
-    extern "C"
-#endif
-    void print_something();
+    extern "C" void print_something();
 }
+#endif
 
