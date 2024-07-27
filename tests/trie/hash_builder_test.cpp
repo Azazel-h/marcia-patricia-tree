@@ -19,12 +19,10 @@
 // #include <catch2/catch_test_macros.hpp>
 // #include <ethash/keccak.hpp>
 
-// #include "common/empty_hashes.hpp"
-// #include "common/util.hpp"
-// #include "rlp/encode.hpp"
-// #include "trie/hash_builder.hpp"
-// #include "trie/nibbles.hpp"
-// //#include "types/evmc_bytes32.hpp"
+// #include <merkle-patricia-tree/common/util.hpp>
+// #include <merkle-patricia-tree/rpl/encode.hpp>
+// #include <merkle-patricia-tree/trie/hash_builder.hpp>
+// #include <merkle-patricia-tree/trie/nibbles.hpp>
 
 // namespace silkworm::trie {
 
