@@ -1,5 +1,5 @@
 # Merkle Patricia tree
-![Testing](https://github.com/Azazel-h/merkle-patricia-tree/actions/workflows/cmake-multi-platform.yml/badge.svg)
+![Testing](https://github.com/Azazel-h/merkle-patricia-tree/actions/workflows/cmake-multi-platform.yml/badge.svg) [![codecov](https://codecov.io/gh/Azazel-h/merkle-patricia-tree/graph/badge.svg?token=XJEFCWDOQK)](https://codecov.io/gh/Azazel-h/merkle-patricia-tree)
 ```bash
 $ git clone https://github.com/Azazel-h/merkle-patricia-tree.git --recursive
 ```
