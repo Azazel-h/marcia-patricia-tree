@@ -24,7 +24,7 @@
 // #include "rlp/encode.hpp"
 // #include "trie/hash_builder.hpp"
 // #include "trie/nibbles.hpp"
-// //#include "types/evmc_bytes32.hpp"
+// #include "types/evmc_bytes32.hpp"
 
 // namespace silkworm::trie {
 
