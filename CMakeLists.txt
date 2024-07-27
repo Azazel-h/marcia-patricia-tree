@@ -80,6 +80,8 @@ foreach (header ${public_headers})
 endforeach ()
 
 if (TRIE_BUILD_TESTING)
+    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -g -O0 --coverage")
+    set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} --coverage")
     add_subdirectory(external/catch2)
 
     file(GLOB_RECURSE TESTS_SRC
@@ -113,7 +115,6 @@ if (TRIE_BUILD_TESTING)
             TEST_PREFIX "mpt-tests:"
     )
     enable_testing()
-
 endif ()
 
 install(TARGETS ${PROJECT_NAME}

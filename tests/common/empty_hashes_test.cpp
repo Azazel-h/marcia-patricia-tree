@@ -1,45 +1,43 @@
-// /*
-//    Copyright 2023 The Silkworm Authors
+/*
+   Copyright 2023 The Silkworm Authors
 
-//    Licensed under the Apache License, Version 2.0 (the "License");
-//    you may not use this file except in compliance with the License.
-//    You may obtain a copy of the License at
+   Licensed under the Apache License, Version 2.0 (the "License");
+   you may not use this file except in compliance with the License.
+   You may obtain a copy of the License at
 
-//        http://www.apache.org/licenses/LICENSE-2.0
+       http://www.apache.org/licenses/LICENSE-2.0
 
-//    Unless required by applicable law or agreed to in writing, software
-//    distributed under the License is distributed on an "AS IS" BASIS,
-//    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-//    See the License for the specific language governing permissions and
-//    limitations under the License.
-// */
+   Unless required by applicable law or agreed to in writing, software
+   distributed under the License is distributed on an "AS IS" BASIS,
+   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+   See the License for the specific language governing permissions and
+   limitations under the License.
+*/
 
-// #include "common/empty_hashes.hpp"
+#include <bit>
 
-// #include <bit>
+#include <catch2/catch_test_macros.hpp>
 
-// #include <catch2/catch_test_macros.hpp>
+#include <merkle-patricia-tree/rlp/encode.hpp>
+#include <merkle-patricia-tree/common/util.hpp>
+#include <merkle-patricia-tree/common/empty_hashes.hpp>
+#include <merkle-patricia-tree/rlp/decode.hpp>
 
-// #include "rlp/encode.hpp"
+namespace silkworm {
 
-// #include "common/bytes.hpp"
-// #include "common/util.hpp"
+TEST_CASE("Empty hashes") {
+    const ByteView empty_string;
+    const ethash::hash256 hash_of_empty_string{keccak256(empty_string)};
+    CHECK(std::bit_cast<evmc_bytes32>(hash_of_empty_string) == kEmptyHash);
 
-// namespace silkworm {
+    const Bytes empty_list_rlp(1, rlp::kEmptyListCode);
+    const ethash::hash256 hash_of_empty_list_rlp{keccak256(empty_list_rlp)};
+    CHECK(std::bit_cast<evmc_bytes32>(hash_of_empty_list_rlp) == kEmptyListHash);
 
-// TEST_CASE("Empty hashes") {
-//     const ByteView empty_string;
-//     const ethash::hash256 hash_of_empty_string{keccak256(empty_string)};
-//     CHECK(std::bit_cast<evmc_bytes32>(hash_of_empty_string) == kEmptyHash);
+    // See https://github.com/ethereum/yellowpaper/pull/852
+    const Bytes empty_string_rlp(1, rlp::kEmptyStringCode);
+    const ethash::hash256 hash_of_empty_string_rlp{keccak256(empty_string_rlp)};
+    CHECK(std::bit_cast<evmc_bytes32>(hash_of_empty_string_rlp) == kEmptyRoot);
+}
 
-//     const Bytes empty_list_rlp(1, rlp::kEmptyListCode);
-//     const ethash::hash256 hash_of_empty_list_rlp{keccak256(empty_list_rlp)};
-//     CHECK(std::bit_cast<evmc_bytes32>(hash_of_empty_list_rlp) == kEmptyListHash);
-
-//     // See https://github.com/ethereum/yellowpaper/pull/852
-//     const Bytes empty_string_rlp(1, rlp::kEmptyStringCode);
-//     const ethash::hash256 hash_of_empty_string_rlp{keccak256(empty_string_rlp)};
-//     CHECK(std::bit_cast<evmc_bytes32>(hash_of_empty_string_rlp) == kEmptyRoot);
-// }
-
-// }  // namespace silkworm
+}  // namespace silkworm

@@ -14,7 +14,6 @@
 
 #include "intx/intx.hpp"
 
-
 namespace silkworm::rlp {
 
 // Whether to allow or prohibit trailing characters in an input after decoding.
