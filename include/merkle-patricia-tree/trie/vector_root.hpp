@@ -1,27 +1,11 @@
-/*
-   Copyright 2022 The Silkworm Authors
-
-   Licensed under the Apache License, Version 2.0 (the "License");
-   you may not use this file except in compliance with the License.
-   You may obtain a copy of the License at
-
-       http://www.apache.org/licenses/LICENSE-2.0
-
-   Unless required by applicable law or agreed to in writing, software
-   distributed under the License is distributed on an "AS IS" BASIS,
-   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-   See the License for the specific language governing permissions and
-   limitations under the License.
-*/
-
 #pragma once
 
 #include <concepts>
 #include <utility>
 
-#include "merkle-patricia-tree/rpl/encode.hpp"
-#include "hash_builder.hpp"
-#include "nibbles.hpp"
+#include "merkle-patricia-tree/rlp/encode.hpp"
+#include "merkle-patricia-tree/trie/hash_builder.hpp"
+#include "merkle-patricia-tree/trie/nibbles.hpp"
 
 namespace silkworm::trie {
 

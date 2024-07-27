@@ -14,7 +14,7 @@
    limitations under the License.
 */
 
-#include "merkle-patricia-tree/rpl/decode.hpp"
+#include "merkle-patricia-tree/rlp/decode.hpp"
 
 #include <cassert>
 #include <tuple>

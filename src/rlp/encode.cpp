@@ -14,7 +14,7 @@
    limitations under the License.
 */
 
-#include "merkle-patricia-tree/rpl/encode.hpp"
+#include "merkle-patricia-tree/rlp/encode.hpp"
 
 namespace silkworm::rlp {
 

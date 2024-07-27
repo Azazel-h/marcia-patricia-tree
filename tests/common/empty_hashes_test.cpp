@@ -18,10 +18,10 @@
 
 #include <catch2/catch_test_macros.hpp>
 
-#include <merkle-patricia-tree/rpl/encode.hpp>
+#include <merkle-patricia-tree/rlp/encode.hpp>
 #include <merkle-patricia-tree/common/util.hpp>
 #include <merkle-patricia-tree/common/empty_hashes.hpp>
-#include <merkle-patricia-tree/rpl/decode.hpp>
+#include <merkle-patricia-tree/rlp/decode.hpp>
 
 namespace silkworm {
 

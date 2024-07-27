@@ -16,9 +16,9 @@
 
 
 #include <catch2/catch_test_macros.hpp>
-#include <merkle-patricia-tree/rpl/decode.hpp>
+#include <merkle-patricia-tree/rlp/decode.hpp>
 #include <merkle-patricia-tree/common/util.hpp>
-#include <merkle-patricia-tree/rpl/decode_vector.hpp>
+#include <merkle-patricia-tree/rlp/decode_vector.hpp>
 
 namespace silkworm::rlp {
 
