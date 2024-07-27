@@ -16,8 +16,8 @@
 
 // RLP encoding functions as per
 // https://eth.wiki/en/fundamentals/rlp
-#ifndef SILKWORM_RPL_ENCODE_HPP
-#define SILKWORM_RPL_ENCODE_HPP
+#ifndef SILKWORM_rlp_ENCODE_HPP
+#define SILKWORM_rlp_ENCODE_HPP
 
 #include "merkle-patricia-tree/common/base.hpp"
 #include "merkle-patricia-tree/common/bytes.hpp"
@@ -104,4 +104,4 @@ size_t silkworm_rlp_length_of_bool(void);
 }
 #endif
 
-#endif // SILKWORM_RPL_ENCODE_HPP
+#endif // SILKWORM_rlp_ENCODE_HPP

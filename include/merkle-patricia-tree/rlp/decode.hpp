@@ -1,5 +1,5 @@
-#ifndef SILKWORM_RPL_DECODE_HPP
-#define SILKWORM_RPL_DECODE_HPP
+#ifndef SILKWORM_rlp_DECODE_HPP
+#define SILKWORM_rlp_DECODE_HPP
 
 #include "merkle-patricia-tree/common/base.hpp"
 #include "merkle-patricia-tree/common/bytes.hpp"
@@ -118,4 +118,4 @@ silkworm_rlp_decode_fixed_bytes(silkworm_ByteView *from, uint8_t *to, size_t len
 #ifdef __cplusplus
 }
 #endif
-#endif // SILKWORM_RPL_DECODE_HPP
+#endif // SILKWORM_rlp_DECODE_HPP

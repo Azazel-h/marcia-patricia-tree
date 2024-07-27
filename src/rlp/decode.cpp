@@ -16,7 +16,7 @@
 #include <cassert>
 #include <tuple>
 
-#include "merkle-patricia-tree/rpl/decode.hpp"
+#include "merkle-patricia-tree/rlp/decode.hpp"
 #include "merkle-patricia-tree/common/endian.hpp"
 
 

@@ -14,8 +14,8 @@
    limitations under the License.
 */
 
-#ifndef SILKWORM_RPL_DECODE_VECTOR_HPP
-#define SILKWORM_RPL_DECODE_VECTOR_HPP
+#ifndef SILKWORM_rlp_DECODE_VECTOR_HPP
+#define SILKWORM_rlp_DECODE_VECTOR_HPP
 
 #ifdef __cplusplus
 
@@ -134,4 +134,4 @@ inline DecodingResult decode(ByteView& from, std::vector<RlpByteView>& to, Lefto
 }  // namespace silkworm::rlp
 
 #endif
-#endif // SILKWORM_RPL_DECODE_VECTOR_HPP
+#endif // SILKWORM_rlp_DECODE_VECTOR_HPP

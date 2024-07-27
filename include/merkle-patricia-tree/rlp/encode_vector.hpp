@@ -14,8 +14,8 @@
    limitations under the License.
 */
 
-#ifndef SILKWORM_RPL_ENCODE_VECTOR_HPP
-#define SILKWORM_RPL_ENCODE_VECTOR_HPP
+#ifndef SILKWORM_rlp_ENCODE_VECTOR_HPP
+#define SILKWORM_rlp_ENCODE_VECTOR_HPP
 
 #ifdef __cplusplus
 
@@ -170,4 +170,4 @@ inline void encode(Bytes& to, const std::vector<RlpBytes>& v) {
 }  // namespace silkworm::rlp
 
 #endif
-#endif // SILKWORM_RPL_ENCODE_VECTOR_HPP
+#endif // SILKWORM_rlp_ENCODE_VECTOR_HPP

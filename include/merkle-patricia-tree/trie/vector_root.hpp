@@ -1,7 +1,7 @@
 #ifndef SILKWORM_TRIE_ROOT_HASH_HPP
 #define SILKWORM_TRIE_ROOT_HASH_HPP
 
-#include "merkle-patricia-tree/rpl/encode.hpp"
+#include "merkle-patricia-tree/rlp/encode.hpp"
 #include "hash_builder.hpp"
 #include "nibbles.hpp"
 

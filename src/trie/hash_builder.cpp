@@ -24,7 +24,7 @@
 #include "merkle-patricia-tree/common/assert.hpp"
 #include "merkle-patricia-tree/common/empty_hashes.hpp"
 #include "merkle-patricia-tree/common/util.hpp"
-#include "merkle-patricia-tree/rpl/encode.hpp"
+#include "merkle-patricia-tree/rlp/encode.hpp"
 
 namespace silkworm::trie {
 
