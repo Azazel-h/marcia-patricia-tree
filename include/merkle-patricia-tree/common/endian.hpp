@@ -1,3 +1,8 @@
+#ifndef SILKWORM_ENDIAN_HPP
+#define SILKWORM_ENDIAN_HPP
+
+#ifdef __cplusplus
+
 /*
    Copyright 2022 The Silkworm Authors
 
@@ -116,3 +121,43 @@ static DecodingResult from_big_compact(ByteView data, T& out) {
 }
 
 }  // namespace silkworm::endian
+
+#endif // __cplusplus
+
+// C interface
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+#include <stdint.h>
+#include <stdbool.h>
+#include "bytes.hpp"
+#include "decoding_result.hpp"
+
+uint16_t silkworm_endian_load_big_u16(const uint8_t* src);
+uint32_t silkworm_endian_load_big_u32(const uint8_t* src);
+uint64_t silkworm_endian_load_big_u64(const uint8_t* src);
+
+uint16_t silkworm_endian_load_little_u16(const uint8_t* src);
+uint32_t silkworm_endian_load_little_u32(const uint8_t* src);
+uint64_t silkworm_endian_load_little_u64(const uint8_t* src);
+
+void silkworm_endian_store_big_u16(uint8_t* dst, uint16_t value);
+void silkworm_endian_store_big_u32(uint8_t* dst, uint32_t value);
+void silkworm_endian_store_big_u64(uint8_t* dst, uint64_t value);
+
+void silkworm_endian_store_little_u16(uint8_t* dst, uint16_t value);
+void silkworm_endian_store_little_u32(uint8_t* dst, uint32_t value);
+void silkworm_endian_store_little_u64(uint8_t* dst, uint64_t value);
+
+silkworm_ByteView silkworm_endian_to_big_compact_u64(uint64_t value);
+silkworm_ByteView silkworm_endian_to_big_compact_u256(const uint8_t* value);
+
+silkworm_DecodingResult silkworm_endian_from_big_compact_u64(const silkworm_ByteView* data, uint64_t* out);
+silkworm_DecodingResult silkworm_endian_from_big_compact_u256(const silkworm_ByteView* data, uint8_t* out);
+
+#ifdef __cplusplus
+}
+#endif
+
+#endif // SILKWORM_ENDIAN_HPP

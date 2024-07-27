@@ -1,19 +1,3 @@
-/*
-   Copyright 2022 The Silkworm Authors
-
-   Licensed under the Apache License, Version 2.0 (the "License");
-   you may not use this file except in compliance with the License.
-   You may obtain a copy of the License at
-
-       http://www.apache.org/licenses/LICENSE-2.0
-
-   Unless required by applicable law or agreed to in writing, software
-   distributed under the License is distributed on an "AS IS" BASIS,
-   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-   See the License for the specific language governing permissions and
-   limitations under the License.
-*/
-
 #include "merkle-patricia-tree/trie/nibbles.hpp"
 
 namespace silkworm::trie {
@@ -50,3 +34,33 @@ Bytes unpack_nibbles(ByteView data) {
 }
 
 }  // namespace silkworm::trie
+
+// C interface implementation
+silkworm_Bytes silkworm_pack_nibbles(const silkworm_ByteView* unpacked) {
+    if (unpacked == nullptr) {
+        return silkworm_Bytes_create(0);
+    }
+
+    silkworm::ByteView cpp_unpacked(unpacked->data, unpacked->length);
+    silkworm::Bytes cpp_result = silkworm::trie::pack_nibbles(cpp_unpacked);
+
+    silkworm_Bytes result = silkworm_Bytes_create(cpp_result.size());
+    silkworm_Bytes_append(&result, cpp_result.data(), cpp_result.size());
+
+    return result;
+}
+
+silkworm_Bytes silkworm_unpack_nibbles(const silkworm_ByteView* data) {
+    if (data == nullptr) {
+        return silkworm_Bytes_create(0);
+    }
+
+    silkworm::ByteView cpp_data(data->data, data->length);
+    silkworm::Bytes cpp_result = silkworm::trie::unpack_nibbles(cpp_data);
+
+    silkworm_Bytes result = silkworm_Bytes_create(cpp_result.size());
+    silkworm_Bytes_append(&result, cpp_result.data(), cpp_result.size());
+
+    return result;
+}
+

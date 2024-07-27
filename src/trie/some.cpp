@@ -9,3 +9,7 @@ namespace sm::lbr {
         std::cout << "Hello" << std::endl;
     }
 }
+
+void print_something() {
+    sm::lbr::print_something();
+}

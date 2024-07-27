@@ -1,19 +1,3 @@
-/*
-   Copyright 2022 The Silkworm Authors
-
-   Licensed under the Apache License, Version 2.0 (the "License");
-   you may not use this file except in compliance with the License.
-   You may obtain a copy of the License at
-
-       http://www.apache.org/licenses/LICENSE-2.0
-
-   Unless required by applicable law or agreed to in writing, software
-   distributed under the License is distributed on an "AS IS" BASIS,
-   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-   See the License for the specific language governing permissions and
-   limitations under the License.
-*/
-
 #include "merkle-patricia-tree/trie/node.hpp"
 
 #include <bit>
@@ -106,3 +90,104 @@ DecodingResult Node::decode_from_storage(ByteView raw, Node& node) {
 }
 
 }  // namespace silkworm::trie
+
+struct silkworm_Node {
+    silkworm::trie::Node cpp_node;
+};
+
+silkworm_Node* silkworm_Node_create() {
+    return new silkworm_Node();
+}
+
+void silkworm_Node_destroy(silkworm_Node* node) {
+    delete node;
+}
+
+silkworm_Node* silkworm_Node_create_with_params(uint16_t state_mask, uint16_t tree_mask, uint16_t hash_mask,
+                                                const silkworm_Bytes* hashes, size_t hashes_count,
+                                                const uint8_t* root_hash) {
+    std::vector<evmc::bytes32> cpp_hashes;
+    for (size_t i = 0; i < hashes_count; ++i) {
+        evmc::bytes32 hash;
+        std::memcpy(hash.bytes, hashes[i].data, sizeof(evmc::bytes32));
+        cpp_hashes.push_back(hash);
+    }
+
+    std::optional<evmc::bytes32> cpp_root_hash;
+    if (root_hash) {
+        cpp_root_hash = evmc::bytes32();
+        std::memcpy(cpp_root_hash->bytes, root_hash, sizeof(evmc::bytes32));
+    }
+
+    auto node = new silkworm_Node();
+    node->cpp_node = silkworm::trie::Node(state_mask, tree_mask, hash_mask, std::move(cpp_hashes), cpp_root_hash);
+    return node;
+}
+
+uint16_t silkworm_Node_state_mask(const silkworm_Node* node) {
+    return node->cpp_node.state_mask();
+}
+
+uint16_t silkworm_Node_tree_mask(const silkworm_Node* node) {
+    return node->cpp_node.tree_mask();
+}
+
+uint16_t silkworm_Node_hash_mask(const silkworm_Node* node) {
+    return node->cpp_node.hash_mask();
+}
+
+size_t silkworm_Node_hashes_count(const silkworm_Node* node) {
+    return node->cpp_node.hashes().size();
+}
+
+const uint8_t* silkworm_Node_hash_at(const silkworm_Node* node, size_t index) {
+    if (index >= node->cpp_node.hashes().size()) {
+        return nullptr;
+    }
+    return node->cpp_node.hashes()[index].bytes;
+}
+
+bool silkworm_Node_has_root_hash(const silkworm_Node* node) {
+    return node->cpp_node.root_hash().has_value();
+}
+
+const uint8_t* silkworm_Node_root_hash(const silkworm_Node* node) {
+    if (!node->cpp_node.root_hash()) {
+        return nullptr;
+    }
+    return node->cpp_node.root_hash()->bytes;
+}
+
+void silkworm_Node_set_root_hash(silkworm_Node* node, const uint8_t* root_hash) {
+    if (root_hash) {
+        evmc::bytes32 cpp_root_hash;
+        std::memcpy(cpp_root_hash.bytes, root_hash, sizeof(evmc::bytes32));
+        node->cpp_node.set_root_hash(cpp_root_hash);
+    } else {
+        node->cpp_node.set_root_hash(std::nullopt);
+    }
+}
+
+silkworm_Bytes silkworm_Node_encode_for_storage(const silkworm_Node* node) {
+    silkworm::Bytes encoded = node->cpp_node.encode_for_storage();
+    silkworm_Bytes result = silkworm_Bytes_create(encoded.size());
+    silkworm_Bytes_append(&result, encoded.data(), encoded.size());
+    return result;
+}
+
+silkworm_DecodingResult silkworm_Node_decode_from_storage(const silkworm_ByteView* raw, silkworm_Node* node) {
+    silkworm::ByteView cpp_raw(raw->data, raw->length);
+    auto result = silkworm::trie::Node::decode_from_storage(cpp_raw, node->cpp_node);
+    silkworm_DecodingResult c_result;
+    if (result) {
+        c_result.has_error = 0;
+    } else {
+        c_result.has_error = 1;
+        c_result.error = static_cast<silkworm_DecodingError>(result.error());
+    }
+    return c_result;
+}
+
+bool silkworm_is_subset(uint16_t sub, uint16_t sup) {
+    return silkworm::trie::is_subset(sub, sup);
+}
