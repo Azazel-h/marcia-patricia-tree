@@ -18,6 +18,7 @@ target_link_libraries(merkle_patricia_tree_tests
         PRIVATE
         merkle-patricia-tree  # Your main library
         Catch2::Catch2WithMain  # Catch2 library
+        ethash::ethash
 
 )
 
