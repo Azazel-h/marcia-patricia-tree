@@ -25,43 +25,50 @@
 // namespace silkworm::trie {
 
 TEST_CASE("Nibbles Wrappers") {
-    // std::vector<std::pair<std::string, std::string>> test_cases = {
-    //     // Bytes -> Nibbles
-    //     {"", ""},                                                  //
-    //     {"00", "0000"},                                            //
-    //     {"01", "0001"},                                            //
-    //     {"0f", "000f"},                                            //
-    //     {"f011", "0f000101"},                                      //
-    //     {"f111", "0f010101"},                                      //
-    //     {"123456789a", "0102030405060708090a"},                    //
-    //     {"123456789f", "0102030405060708090f"},                    //
-    //     {"12345678aa", "01020304050607080a0a"},                    //
-    //     {"123456789abcdeff", "0102030405060708090a0b0c0d0e0f0f"},  //
-    // };
+// std::vector<std::pair<std::string, std::string>> test_cases = {
+//     // Bytes -> Nibbles
+//     {"", ""},                                                  //
+//     {"00", "0000"},                                            //
+//     {"01", "0001"},                                            //
+//     {"0f", "000f"},                                            //
+//     {"f011", "0f000101"},                                      //
+//     {"f111", "0f010101"},                                      //
+//     {"123456789a", "0102030405060708090a"},                    //
+//     {"123456789f", "0102030405060708090f"},                    //
+//     {"12345678aa", "01020304050607080a0a"},                    //
+//     {"123456789abcdeff", "0102030405060708090a0b0c0d0e0f0f"},  //
+// };
 
-    // for (const auto& test_case : test_cases) {
-    //     // if (test_case.first.empty()) {
-    //     //     auto packed = silkworm_pack_nibbles({});
-    //     //     REQUIRE(packed.empty());
-    //     //     REQUIRE(silkworm_unpack_nibbles(packed).empty());
-    //     //     continue;
-    //     // }
+// for (const auto& test_case : test_cases) {
+//     // if (test_case.first.empty()) {
+//     //     auto packed = silkworm_pack_nibbles({});
+//     //     REQUIRE(packed.empty());
+//     //     REQUIRE(silkworm_unpack_nibbles(packed).empty());
+//     //     continue;
+//     // }
 
-    //     // const auto packed{from_hex(test_case.first)};
-    //     // const auto unpacked{from_hex(test_case.second)};
-    //     // REQUIRE((packed.has_value() && unpacked.has_value()));
-    //     // REQUIRE(to_hex(silkworm_unpack_nibbles(*packed)) == test_case.second);
-    //     // REQUIRE(to_hex(silkworm_pack_nibbles(*unpacked)) == test_case.first);
-    // }
+//     // const auto packed{from_hex(test_case.first)};
+//     // const auto unpacked{from_hex(test_case.second)};
+//     // REQUIRE((packed.has_value() && unpacked.has_value()));
+//     // REQUIRE(to_hex(silkworm_unpack_nibbles(*packed)) == test_case.second);
+//     // REQUIRE(to_hex(silkworm_pack_nibbles(*unpacked)) == test_case.first);
+// }
 
-    // Pack an odd length nibbled key
-    const char array[] = {1u, 2u, 3u};
-    size_t array_size = 3;
-    const silkworm_ByteView byte_view_input = silkworm_string_view_to_byte_view(array, array_size);
-    // const silkworm_Bytes bytes_input = silkworm_string_to_bytes(array, array_size);
-    const silkworm_Bytes packed = silkworm_pack_nibbles(&byte_view_input);
-    const char* hex = silkworm_to_hex(byte_view_input, false);
-    REQUIRE(hex == "1230");
+// Pack an odd length nibbled key
+    const uint8_t array[] = {1u, 2u, 3u};
+    size_t array_size = sizeof(array);
+
+    silkworm_ByteView byte_view_input = silkworm_ByteView_create(array, array_size);
+
+    silkworm_Bytes packed = silkworm_pack_nibbles(&byte_view_input);  // Обратите внимание на &
+
+    silkworm_ByteView packed_view = silkworm_ByteView_create(packed.data, packed.length);
+    char *hex = silkworm_to_hex(packed_view, false);  // Также передаем указатель
+
+    REQUIRE(std::string(hex) == "1230");
+
+    free(hex);
+    silkworm_Bytes_destroy(&packed);
 }
 
 // }  // namespace silkworm::trie
