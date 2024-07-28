@@ -56,7 +56,7 @@ TEST_CASE("Nibbles Wrappers") {
 
     // Pack an odd length nibbled key
     const char array[] = {1u, 2u, 3u};
-    size_t array_size = 2;
+    size_t array_size = 3;
     const silkworm_ByteView byte_view_input = silkworm_string_view_to_byte_view(array, array_size);
     // const silkworm_Bytes bytes_input = silkworm_string_to_bytes(array, array_size);
     const silkworm_Bytes packed = silkworm_pack_nibbles(&byte_view_input);
